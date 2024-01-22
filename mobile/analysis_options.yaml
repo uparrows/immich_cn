@@ -1,0 +1,91 @@
+# This file configures the analyzer, which statically analyzes Dart code to
+# check for errors, warnings, and lints.
+#
+# The issues identified by the analyzer are surfaced in the UI of Dart-enabled
+# IDEs (https://dart.dev/tools#ides-and-editors). The analyzer can also be
+# invoked from the command line by running `flutter analyze`.
+
+# The following line activates a set of recommended lints for Flutter apps,
+# packages, and plugins designed to encourage good coding practices.
+include: package:flutter_lints/flutter.yaml
+
+linter:
+  # The lint rules applied to this project can be customized in the
+  # section below to disable rules from the `package:flutter_lints/flutter.yaml`
+  # included above or to enable additional rules. A list of all available lints
+  # and their documentation is published at
+  # https://dart-lang.github.io/linter/lints/index.html.
+  #
+  # Instead of disabling a lint rule for the entire project in the
+  # section below, it can also be suppressed for a single line of code
+  # or a specific dart file by using the `// ignore: name_of_lint` and
+  # `// ignore_for_file: name_of_lint` syntax on the line or in the file
+  # producing the lint.
+
+  rules:
+    # avoid_print: false  # Uncomment to disable the `avoid_print` rule
+    # prefer_single_quotes: true # Uncomment to enable the `prefer_single_quotes` rule
+    use_build_context_synchronously: false
+    require_trailing_commas: true
+    unrelated_type_equality_checks: true
+
+# Additional information about this file can be found at
+# https://dart.dev/guides/language/analysis-options
+analyzer:
+  exclude:
+    - openapi/
+    - openapi/test/
+    - lib/generated_plugin_registrant.dart
+  
+plugins:
+  - custom_lint
+
+dart_code_metrics:
+  metrics:
+    cyclomatic-complexity: 20
+    number-of-parameters: 4
+    maximum-nesting-level: 5
+  rules:
+    # Common
+    - avoid-accessing-collections-by-constant-index
+    - avoid-accessing-other-classes-private-members
+    - avoid-cascade-after-if-null
+    - avoid-collapsible-if
+    - avoid-collection-methods-with-unrelated-types
+    - avoid-double-slash-imports
+    - avoid-duplicate-cascades
+    - avoid-duplicate-patterns
+    - avoid-generics-shadowing
+    - avoid-global-state
+    # Flutter
+    - add-copy-with:
+        file-name-pattern: '.model.dart'
+    - always-remove-listener
+    - avoid-border-all
+    - avoid-empty-setstate
+    - avoid-expanded-as-spacer
+    - avoid-incomplete-copy-with
+    - avoid-inherited-widget-in-initstate
+    - avoid-late-context
+    - avoid-recursive-widget-calls
+    - avoid-returning-widgets
+    - avoid-shrink-wrap-in-lists
+    - avoid-single-child-column-or-row
+    - avoid-state-constructors
+    - avoid-stateless-widget-initialized-fields
+    - avoid-unnecessary-overrides-in-state
+    - avoid-unnecessary-stateful-widgets
+    - avoid-wrapping-in-padding
+    - dispose-fields
+    - prefer-const-border-radius
+    - prefer-correct-edge-insets-constructor
+    - prefer-dedicated-media-query-methods
+    - prefer-define-hero-tag
+    - prefer-extracting-callbacks
+    - prefer-single-widget-per-file:
+        ignore-private-widgets: true
+    - prefer-sliver-prefix
+    - prefer-text-rich
+    - prefer-using-list-view
+    - proper-super-calls
+    - use-setstate-synchronously

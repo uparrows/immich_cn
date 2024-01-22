@@ -1,0 +1,71 @@
+version: "3.8"
+
+name: immich-prod
+
+x-server-build: &server-common
+  image: immich-server:latest
+  build:
+    context: ../
+    dockerfile: server/Dockerfile
+  volumes:
+    - ${UPLOAD_LOCATION}/photos:/usr/src/app/upload
+    - /etc/localtime:/etc/localtime:ro
+  env_file:
+    - .env
+  restart: always
+
+services:
+  immich-server:
+    container_name: immich_server
+    command: [ "./start-server.sh" ]
+    <<: *server-common
+    ports:
+      - 2283:3001
+    depends_on:
+      - redis
+      - database
+
+  immich-microservices:
+    container_name: immich_microservices
+    command: [ "./start-microservices.sh" ]
+    <<: *server-common
+    # extends:
+    #   file: hwaccel.yml
+    #   service: hwaccel
+    depends_on:
+      - redis
+      - database
+      - immich-server
+
+  immich-machine-learning:
+    container_name: immich_machine_learning
+    image: immich-machine-learning:latest
+    build:
+      context: ../machine-learning
+      dockerfile: Dockerfile
+    volumes:
+      - model-cache:/cache
+    env_file:
+      - .env
+    restart: always
+
+  redis:
+    container_name: immich_redis
+    image: redis:6.2-alpine@sha256:c5a607fb6e1bb15d32bbcf14db22787d19e428d59e31a5da67511b49bb0f1ccc
+    restart: always
+
+  database:
+    container_name: immich_postgres
+    image: tensorchord/pgvecto-rs:pg14-v0.1.11@sha256:0335a1a22f8c5dd1b697f14f079934f5152eaaa216c09b61e293be285491f8ee
+    env_file:
+      - .env
+    environment:
+      POSTGRES_PASSWORD: ${DB_PASSWORD}
+      POSTGRES_USER: ${DB_USERNAME}
+      POSTGRES_DB: ${DB_DATABASE_NAME}
+    volumes:
+      - ${UPLOAD_LOCATION}/postgres:/var/lib/postgresql/data
+    restart: always
+
+volumes:
+  model-cache:

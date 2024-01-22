@@ -1,0 +1,137 @@
+<script lang="ts">
+  import { goto } from '$app/navigation';
+  import AssetViewer from '$lib/components/asset-viewer/asset-viewer.svelte';
+  import UserPageLayout from '$lib/components/layouts/user-page-layout.svelte';
+  import MapSettingsModal from '$lib/components/map-page/map-settings-modal.svelte';
+  import Portal from '$lib/components/shared-components/portal/portal.svelte';
+  import { AppRoute } from '$lib/constants';
+  import { assetViewingStore } from '$lib/stores/asset-viewing.store';
+  import { mapSettings } from '$lib/stores/preferences.store';
+  import { featureFlags } from '$lib/stores/server-config.store';
+  import { type MapMarkerResponseDto, api } from '@api';
+  import { isEqual, omit } from 'lodash-es';
+  import { DateTime, Duration } from 'luxon';
+  import { onDestroy, onMount } from 'svelte';
+  import type { PageData } from './$types';
+  import Map from '$lib/components/shared-components/map/map.svelte';
+
+  export let data: PageData;
+
+  let { isViewing: showAssetViewer, asset: viewingAsset } = assetViewingStore;
+
+  let abortController: AbortController;
+  let mapMarkers: MapMarkerResponseDto[] = [];
+  let viewingAssets: string[] = [];
+  let viewingAssetCursor = 0;
+  let showSettingsModal = false;
+
+  onMount(() => {
+    loadMapMarkers().then((data) => (mapMarkers = data));
+  });
+
+  onDestroy(() => {
+    abortController?.abort();
+    assetViewingStore.showAssetViewer(false);
+  });
+
+  $: $featureFlags.map || goto(AppRoute.PHOTOS);
+
+  async function loadMapMarkers() {
+    if (abortController) {
+      abortController.abort();
+    }
+    abortController = new AbortController();
+
+    const { includeArchived, onlyFavorites } = $mapSettings;
+    const { fileCreatedAfter, fileCreatedBefore } = getFileCreatedDates();
+
+    const { data } = await api.assetApi.getMapMarkers(
+      {
+        isArchived: includeArchived && undefined,
+        isFavorite: onlyFavorites || undefined,
+        fileCreatedAfter: fileCreatedAfter || undefined,
+        fileCreatedBefore,
+      },
+      {
+        signal: abortController.signal,
+      },
+    );
+    return data;
+  }
+
+  function getFileCreatedDates() {
+    const { relativeDate, dateAfter, dateBefore } = $mapSettings;
+
+    if (relativeDate) {
+      const duration = Duration.fromISO(relativeDate);
+      return {
+        fileCreatedAfter: duration.isValid ? DateTime.now().minus(duration).toISO() : undefined,
+      };
+    }
+
+    try {
+      return {
+        fileCreatedAfter: dateAfter ? new Date(dateAfter).toISOString() : undefined,
+        fileCreatedBefore: dateBefore ? new Date(dateBefore).toISOString() : undefined,
+      };
+    } catch {
+      $mapSettings.dateAfter = '';
+      $mapSettings.dateBefore = '';
+      return {};
+    }
+  }
+
+  function onViewAssets(assetIds: string[]) {
+    assetViewingStore.setAssetId(assetIds[0]);
+    viewingAssets = assetIds;
+    viewingAssetCursor = 0;
+  }
+
+  function navigateNext() {
+    if (viewingAssetCursor < viewingAssets.length - 1) {
+      assetViewingStore.setAssetId(viewingAssets[++viewingAssetCursor]);
+    }
+  }
+
+  function navigatePrevious() {
+    if (viewingAssetCursor > 0) {
+      assetViewingStore.setAssetId(viewingAssets[--viewingAssetCursor]);
+    }
+  }
+</script>
+
+{#if $featureFlags.loaded && $featureFlags.map}
+  <UserPageLayout title={data.meta.title}>
+    <div class="isolate h-full w-full">
+      <Map bind:mapMarkers bind:showSettingsModal on:selected={(event) => onViewAssets(event.detail)} />
+    </div></UserPageLayout
+  >
+  <Portal target="body">
+    {#if $showAssetViewer}
+      <AssetViewer
+        asset={$viewingAsset}
+        showNavigation={viewingAssets.length > 1}
+        on:next={navigateNext}
+        on:previous={navigatePrevious}
+        on:close={() => assetViewingStore.showAssetViewer(false)}
+        isShared={false}
+      />
+    {/if}
+  </Portal>
+
+  {#if showSettingsModal}
+    <MapSettingsModal
+      settings={{ ...$mapSettings }}
+      on:close={() => (showSettingsModal = false)}
+      on:save={async ({ detail }) => {
+        const shouldUpdate = !isEqual(omit(detail, 'allowDarkMode'), omit($mapSettings, 'allowDarkMode'));
+        showSettingsModal = false;
+        $mapSettings = detail;
+
+        if (shouldUpdate) {
+          mapMarkers = await loadMapMarkers();
+        }
+      }}
+    />
+  {/if}
+{/if}

@@ -1,0 +1,409 @@
+name: Test
+on:
+  workflow_dispatch:
+  pull_request:
+  push:
+    branches: [main]
+
+concurrency:
+  group: ${{ github.workflow }}-${{ github.ref }}
+  cancel-in-progress: true
+
+jobs:
+  server-e2e-api:
+    name: Server (e2e-api)
+    runs-on: mich
+    defaults:
+      run:
+        working-directory: ./server
+
+    steps:
+      - name: Checkout code
+        uses: actions/checkout@v4
+
+      - name: Run npm install
+        run: npm ci
+
+      - name: Run e2e tests
+        run: npm run e2e:api
+
+  server-e2e-jobs:
+    name: Server (e2e-jobs)
+    runs-on: mich
+
+    steps:
+      - name: Checkout code
+        uses: actions/checkout@v4
+        with:
+          submodules: "recursive"
+
+      - name: Run e2e tests
+        run: make server-e2e-jobs
+
+  doc-tests:
+    name: Docs
+    runs-on: ubuntu-latest
+    defaults:
+      run:
+        working-directory: ./docs
+
+    steps:
+      - name: Checkout code
+        uses: actions/checkout@v4
+
+      - name: Run npm install
+        run: npm ci
+
+      - name: Run formatter
+        run: npm run format
+        if: ${{ !cancelled() }}
+
+      - name: Run build
+        run: npm run build
+        if: ${{ !cancelled() }}
+
+  server-unit-tests:
+    name: Server
+    runs-on: ubuntu-latest
+    defaults:
+      run:
+        working-directory: ./server
+
+    steps:
+      - name: Checkout code
+        uses: actions/checkout@v4
+
+      - name: Run npm install
+        run: npm ci
+
+      - name: Run linter
+        run: npm run lint
+        if: ${{ !cancelled() }}
+
+      - name: Run formatter
+        run: npm run format
+        if: ${{ !cancelled() }}
+
+      - name: Run tsc
+        run: npm run check
+        if: ${{ !cancelled() }}
+
+      - name: Run unit tests & coverage
+        run: npm run test:cov
+        if: ${{ !cancelled() }}
+
+  cli-unit-tests:
+    name: CLI
+    runs-on: ubuntu-latest
+    defaults:
+      run:
+        working-directory: ./cli
+
+    steps:
+      - name: Checkout code
+        uses: actions/checkout@v4
+
+      - name: Run setup typescript-sdk
+        run: npm ci && npm run build
+        working-directory: ./open-api/typescript-sdk
+
+      - name: Run npm install (cli)
+        run: npm ci
+
+      - name: Run npm install (server)
+        run: npm ci
+        working-directory: ./server
+
+      - name: Run linter
+        run: npm run lint
+        if: ${{ !cancelled() }}
+
+      - name: Run formatter
+        run: npm run format
+        if: ${{ !cancelled() }}
+
+      - name: Run tsc
+        run: npm run check
+        if: ${{ !cancelled() }}
+
+      - name: Run unit tests & coverage
+        run: npm run test:cov
+        if: ${{ !cancelled() }}
+
+  cli-e2e-tests:
+    name: CLI (e2e)
+    runs-on: ubuntu-latest
+    defaults:
+      run:
+        working-directory: ./cli
+
+    steps:
+      - name: Checkout code
+        uses: actions/checkout@v4
+        with:
+          submodules: "recursive"
+
+      - name: Run setup typescript-sdk
+        run: npm ci && npm run build
+        working-directory: ./open-api/typescript-sdk
+
+      - name: Run npm install (cli)
+        run: npm ci
+
+      - name: Run npm install (server)
+        run: npm ci
+        working-directory: ./server
+
+      - name: Run e2e tests
+        run: npm run test:e2e
+
+  web-unit-tests:
+    name: Web
+    runs-on: ubuntu-latest
+    defaults:
+      run:
+        working-directory: ./web
+
+    steps:
+      - name: Checkout code
+        uses: actions/checkout@v4
+
+      - name: Run setup typescript-sdk
+        run: npm ci && npm run build
+        working-directory: ./open-api/typescript-sdk
+
+      - name: Run npm install
+        run: npm ci
+
+      - name: Run linter
+        run: npm run lint
+        if: ${{ !cancelled() }}
+
+      - name: Run formatter
+        run: npm run format
+        if: ${{ !cancelled() }}
+
+      - name: Run svelte checks
+        run: npm run check:svelte
+        if: ${{ !cancelled() }}
+
+      - name: Run tsc
+        run: npm run check:typescript
+        if: ${{ !cancelled() }}
+
+      - name: Run unit tests & coverage
+        run: npm run test:cov
+        if: ${{ !cancelled() }}
+
+  mobile-unit-tests:
+    name: Mobile
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+      - name: Setup Flutter SDK
+        uses: subosito/flutter-action@v2
+        with:
+          channel: "stable"
+          flutter-version: "3.13.6"
+      - name: Run tests
+        working-directory: ./mobile
+        run: flutter test -j 1
+
+  ml-unit-tests:
+    name: Machine Learning
+    runs-on: ubuntu-latest
+    defaults:
+      run:
+        working-directory: ./machine-learning
+    steps:
+      - uses: actions/checkout@v4
+      - name: Install poetry
+        run: pipx install poetry
+      - uses: actions/setup-python@v5
+        with:
+          python-version: 3.11
+          cache: "poetry"
+      - name: Install dependencies
+        run: |
+          poetry install --with dev
+      - name: Lint with ruff
+        run: |
+          poetry run ruff check --output-format=github app export
+      - name: Check black formatting
+        run: |
+          poetry run black --check app export
+      - name: Run mypy type checking
+        run: |
+          poetry run mypy --install-types --non-interactive --strict app/
+      - name: Run tests and coverage
+        run: |
+          poetry run pytest --cov app
+
+  generated-api-up-to-date:
+    name: OpenAPI Clients
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+      - name: Run API generation
+        run: make open-api
+      - name: Find file changes
+        uses: tj-actions/verify-changed-files@v13.1
+        id: verify-changed-files
+        with:
+          files: |
+            mobile/openapi
+            open-api/typescript-sdk
+      - name: Verify files have not changed
+        if: steps.verify-changed-files.outputs.files_changed == 'true'
+        run: |
+          echo "ERROR: Generated files not up to date!"
+          echo "Changed files: ${{ steps.verify-changed-files.outputs.changed_files }}"
+          exit 1
+
+  generated-typeorm-migrations-up-to-date:
+    name: TypeORM Checks
+    runs-on: ubuntu-latest
+    services:
+      postgres:
+        image: tensorchord/pgvecto-rs:pg14-v0.1.11@sha256:0335a1a22f8c5dd1b697f14f079934f5152eaaa216c09b61e293be285491f8ee
+        env:
+          POSTGRES_PASSWORD: postgres
+          POSTGRES_USER: postgres
+          POSTGRES_DB: immich
+        options: >-
+          --health-cmd pg_isready
+          --health-interval 10s
+          --health-timeout 5s
+          --health-retries 5
+        ports:
+          - 5432:5432
+    defaults:
+      run:
+        working-directory: ./server
+
+    steps:
+      - name: Checkout code
+        uses: actions/checkout@v4
+
+      - name: Install server dependencies
+        run: npm ci
+
+      - name: Build the app
+        run: npm run build
+
+      - name: Run existing migrations
+        run: npm run typeorm:migrations:run
+
+      - name: Test npm run schema:reset command works
+        run: npm run typeorm:schema:reset
+
+      - name: Generate new migrations
+        continue-on-error: true
+        run: npm run typeorm:migrations:generate ./src/infra/migrations/TestMigration
+
+      - name: Find file changes
+        uses: tj-actions/verify-changed-files@v13.1
+        id: verify-changed-files
+        with:
+          files: |
+            server/src/infra/migrations/
+      - name: Verify migration files have not changed
+        if: steps.verify-changed-files.outputs.files_changed == 'true'
+        run: |
+          echo "ERROR: Generated migration files not up to date!"
+          echo "Changed files: ${{ steps.verify-changed-files.outputs.changed_files }}"
+          exit 1
+
+      - name: Run SQL generation
+        run: npm run sql:generate
+        env:
+          DB_URL: postgres://postgres:postgres@localhost:5432/immich
+
+      - name: Find file changes
+        uses: tj-actions/verify-changed-files@v13.1
+        id: verify-changed-sql-files
+        with:
+          files: |
+            server/src/infra/sql
+
+      - name: Verify SQL files have not changed
+        if: steps.verify-changed-sql-files.outputs.files_changed == 'true'
+        run: |
+          echo "ERROR: Generated SQL files not up to date!"
+          echo "Changed files: ${{ steps.verify-changed-sql-files.outputs.changed_files }}"
+          exit 1
+
+  # mobile-integration-tests:
+  #   name: Run mobile end-to-end integration tests
+  #   runs-on: macos-latest
+  #   steps:
+  #     - uses: actions/checkout@v4
+  #     - uses: actions/setup-java@v3
+  #       with:
+  #         distribution: 'zulu'
+  #         java-version: '12.x'
+  #         cache: 'gradle'
+  #     - name: Cache android SDK
+  #       uses: actions/cache@v3
+  #       id: android-sdk
+  #       with:
+  #         key: android-sdk
+  #         path: |
+  #           /usr/local/lib/android/
+  #           ~/.android
+  #     - name: Cache Gradle
+  #       uses: actions/cache@v3
+  #       with:
+  #         path: |
+  #           ./mobile/build/
+  #           ./mobile/android/.gradle/
+  #         key: ${{ runner.os }}-flutter-${{ hashFiles('**/*.gradle*', 'pubspec.lock') }}
+  #     - name: Setup Android SDK
+  #       if: steps.android-sdk.outputs.cache-hit != 'true'
+  #       uses: android-actions/setup-android@v2
+  #     - name: AVD cache
+  #       uses: actions/cache@v3
+  #       id: avd-cache
+  #       with:
+  #         path: |
+  #           ~/.android/avd/*
+  #           ~/.android/adb*
+  #         key: avd-29
+  #     - name: create AVD and generate snapshot for caching
+  #       if: steps.avd-cache.outputs.cache-hit != 'true'
+  #       uses: reactivecircus/android-emulator-runner@v2.27.0
+  #       with:
+  #         working-directory: ./mobile
+  #         cores: 2
+  #         api-level: 29
+  #         arch: x86_64
+  #         profile: pixel
+  #         target: default
+  #         force-avd-creation: false
+  #         emulator-options: -no-window -gpu swiftshader_indirect -noaudio -no-boot-anim -camera-back none
+  #         disable-animations: false
+  #         script: echo "Generated AVD snapshot for caching."
+  #     - name: Setup Flutter SDK
+  #       uses: subosito/flutter-action@v2
+  #       with:
+  #         channel: 'stable'
+  #         flutter-version: '3.7.3'
+  #         cache: true
+  #     - name: Run integration tests
+  #       uses: Wandalen/wretry.action@master
+  #       with:
+  #         action: reactivecircus/android-emulator-runner@v2.27.0
+  #         with: |
+  #           working-directory: ./mobile
+  #           cores: 2
+  #           api-level: 29
+  #           arch: x86_64
+  #           profile: pixel
+  #           target: default
+  #           force-avd-creation: false
+  #           emulator-options: -no-snapshot-save -no-window -gpu swiftshader_indirect -noaudio -no-boot-anim -camera-back none
+  #           disable-animations: true
+  #           script: |
+  #             flutter pub get
+  #             flutter test integration_test
+  #         attempt_limit: 3
