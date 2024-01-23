@@ -20,8 +20,8 @@
     <form autocomplete="off" on:submit|preventDefault>
       <div class="ml-4 mt-4">
         <SettingSwitch
-          title="ENABLED"
-          subtitle="Enable period requests to GitHub to check for new releases"
+          title="启用"
+          subtitle="启用向 GitHub 发送期间请求以检查新版本"
           bind:checked={config.newVersionCheck.enabled}
           {disabled}
         />

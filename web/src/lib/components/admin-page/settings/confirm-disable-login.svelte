@@ -2,10 +2,10 @@
   import ConfirmDialogue from '$lib/components/shared-components/confirm-dialogue.svelte';
 </script>
 
-<ConfirmDialogue title="Disable Login" on:cancel on:confirm>
+<ConfirmDialogue title="禁用日志" on:cancel on:confirm>
   <svelte:fragment slot="prompt">
     <div class="flex flex-col gap-4">
-      <p>您确定要禁用所有登录方法吗？ 登录将被完全禁用.</p>
+      <p>您确定要禁用所有日志方法吗？ 日志将被完全禁用.</p>
       <p>
         To re-enable, use a
         <a

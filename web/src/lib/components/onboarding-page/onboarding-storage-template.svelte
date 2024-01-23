@@ -24,11 +24,11 @@
 </script>
 
 <OnboardingCard>
-  <p class="text-xl text-immich-primary dark:text-immich-dark-primary">STORAGE TEMPLATE</p>
+  <p class="text-xl text-immich-primary dark:text-immich-dark-primary">存储模板</p>
 
   <p>
-    The storage template is used to determine the folder structure and file name of your media files. You can use
-    variables to customize the template to your liking.
+    存储模板用于确定媒体文件的文件夹结构和文件名。
+    您可以根据您的喜好使用变量自定义模板。
   </p>
 
   {#if config && $user}
@@ -46,7 +46,7 @@
           <div class="w-full flex place-content-start">
             <Button class="flex gap-2 place-content-center" on:click={() => dispatch('previous')}>
               <Icon path={mdiArrowLeft} size="18" />
-              <p>Theme</p>
+              <p>主题</p>
             </Button>
           </div>
           <div class="flex w-full place-content-end">
@@ -57,7 +57,7 @@
               }}
             >
               <span class="flex place-content-center place-items-center gap-2">
-                Done
+                完成
                 <Icon path={mdiCheck} size="18" />
               </span>
             </Button>

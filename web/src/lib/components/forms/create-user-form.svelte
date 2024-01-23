@@ -18,7 +18,7 @@
 
   $: {
     if (password !== confirmPassowrd && confirmPassowrd.length > 0) {
-      error = 'Password does not match';
+      error = '密码不匹配';
       canCreateUser = false;
     } else {
       error = '';
@@ -56,24 +56,24 @@
         });
 
         if (status === 201) {
-          success = 'New user created';
+          success = '新用户已创建';
 
           dispatch('submit');
 
           isCreatingUser = false;
           return;
         } else {
-          error = 'Error create user account';
+          error = '创建用户帐户时出错';
           isCreatingUser = false;
         }
       } catch (e) {
-        error = 'Error create user account';
+        error = '创建用户帐户时出错';
         isCreatingUser = false;
 
         console.log('[ERROR] registerUser', e);
 
         notificationController.show({
-          message: `Error create new user, check console for more detail`,
+          message: `创建新用户时出错，请检查控制台以获取更多详细信息`,
           type: NotificationType.Error,
         });
       }
@@ -86,25 +86,25 @@
 >
   <div class="flex flex-col place-content-center place-items-center gap-4 px-4">
     <ImmichLogo class="text-center" height="100" width="100" />
-    <h1 class="text-2xl font-medium text-immich-primary dark:text-immich-dark-primary">Create new user</h1>
+    <h1 class="text-2xl font-medium text-immich-primary dark:text-immich-dark-primary">创建新用户</h1>
     <p class="rounded-md border p-4 font-mono text-sm text-gray-600 dark:border-immich-dark-bg dark:text-gray-300">
-      Please provide your user with the password, they will have to change it on their first sign in.
+      请向您的用户提供该密码，他们必须在首次登录时更改密码。
     </p>
   </div>
 
   <form on:submit|preventDefault={registerUser} autocomplete="off">
     <div class="m-4 flex flex-col gap-2">
-      <label class="immich-form-label" for="email">Email</label>
+      <label class="immich-form-label" for="email">邮件</label>
       <input class="immich-form-input" id="email" name="email" type="email" required />
     </div>
 
     <div class="m-4 flex flex-col gap-2">
-      <label class="immich-form-label" for="password">Password</label>
+      <label class="immich-form-label" for="password">密码</label>
       <input class="immich-form-input" id="password" name="password" type="password" required bind:value={password} />
     </div>
 
     <div class="m-4 flex flex-col gap-2">
-      <label class="immich-form-label" for="confirmPassword">Confirm Password</label>
+      <label class="immich-form-label" for="confirmPassword">确认密码</label>
       <input
         class="immich-form-input"
         id="confirmPassword"
@@ -116,12 +116,12 @@
     </div>
 
     <div class="m-4 flex flex-col gap-2">
-      <label class="immich-form-label" for="name">Name</label>
+      <label class="immich-form-label" for="name">名称</label>
       <input class="immich-form-input" id="name" name="name" type="text" required />
     </div>
 
     <div class="m-4 flex flex-col gap-2">
-      <label class="immich-form-label" for="quotaSize">Quota Size (GiB)</label>
+      <label class="immich-form-label" for="quotaSize">配额 (GiB)</label>
       <input class="immich-form-input" id="quotaSize" name="quotaSize" type="number" min="0" />
     </div>
 
@@ -133,8 +133,8 @@
       <p class="ml-4 text-sm text-immich-primary">{success}</p>
     {/if}
     <div class="flex w-full gap-4 p-4">
-      <Button color="gray" fullwidth on:click={() => dispatch('cancel')}>Cancel</Button>
-      <Button type="submit" disabled={isCreatingUser} fullwidth>Create</Button>
+      <Button color="gray" fullwidth on:click={() => dispatch('cancel')}>取消</Button>
+      <Button type="submit" disabled={isCreatingUser} fullwidth>创建</Button>
     </div>
   </form>
 </div>

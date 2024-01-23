@@ -30,9 +30,9 @@
       <form autocomplete="off" on:submit|preventDefault>
         <div class="ml-4 mt-4 flex flex-col gap-4">
           <SettingSwitch
-            title="ENABLED"
+            title="启用"
             {disabled}
-            subtitle="Enable automatic library scanning"
+            subtitle="启用自动库扫描"
             bind:checked={config.library.scan.enabled}
           />
 

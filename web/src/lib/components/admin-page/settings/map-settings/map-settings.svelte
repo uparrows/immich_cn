@@ -24,7 +24,7 @@
         <SettingAccordion title="Map Settings" subtitle="Manage map settings">
           <div class="ml-4 mt-4 flex flex-col gap-4">
             <SettingSwitch
-              title="ENABLED"
+              title="启用"
               {disabled}
               subtitle="Enable map features"
               bind:checked={config.map.enabled}
@@ -64,9 +64,9 @@
           </svelte:fragment>
           <div class="ml-4 mt-4 flex flex-col gap-4">
             <SettingSwitch
-              title="ENABLED"
+              title="启用"
               {disabled}
-              subtitle="Enable reverse geocoding"
+              subtitle="启用反向地理编码"
               bind:checked={config.reverseGeocoding.enabled}
             />
           </div></SettingAccordion

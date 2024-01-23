@@ -11,7 +11,7 @@
 
   $: {
     if (password !== confirmPassowrd && confirmPassowrd.length > 0) {
-      error = 'Password does not match';
+      error = '密码不匹配';
       canRegister = false;
     } else {
       error = '';
@@ -41,7 +41,7 @@
         await goto(AppRoute.AUTH_LOGIN);
         return;
       } else {
-        error = 'Error create admin account';
+        error = '创建管理员帐户时出错';
         return;
       }
     }
@@ -50,12 +50,12 @@
 
 <form on:submit|preventDefault={registerAdmin} method="post" class="mt-5 flex flex-col gap-5">
   <div class="flex flex-col gap-2">
-    <label class="immich-form-label" for="email">Admin Email</label>
+    <label class="immich-form-label" for="email">管理员邮箱</label>
     <input class="immich-form-input" id="email" name="email" type="email" autocomplete="email" required />
   </div>
 
   <div class="flex flex-col gap-2">
-    <label class="immich-form-label" for="password">Admin Password</label>
+    <label class="immich-form-label" for="password">管理员密码</label>
     <input
       class="immich-form-input"
       id="password"
@@ -68,7 +68,7 @@
   </div>
 
   <div class="flex flex-col gap-2">
-    <label class="immich-form-label" for="confirmPassword">Confirm Admin Password</label>
+    <label class="immich-form-label" for="confirmPassword">确认管理员密码</label>
     <input
       class="immich-form-input"
       id="confirmPassword"
@@ -81,7 +81,7 @@
   </div>
 
   <div class="flex flex-col gap-2">
-    <label class="immich-form-label" for="name">Name</label>
+    <label class="immich-form-label" for="name">名称</label>
     <input class="immich-form-input" id="name" name="name" type="text" autocomplete="name" required />
   </div>
 
@@ -90,6 +90,6 @@
   {/if}
 
   <div class="my-5 flex w-full">
-    <Button type="submit" size="lg" fullwidth>Sign up</Button>
+    <Button type="submit" size="lg" fullwidth>注册</Button>
   </div>
 </form>

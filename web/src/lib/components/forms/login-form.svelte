@@ -176,5 +176,5 @@
 {/if}
 
 {#if !$featureFlags.passwordLogin && !$featureFlags.oauth}
-  <p class="p-4 text-center dark:text-immich-dark-fg">Login has been disabled.</p>
+  <p class="p-4 text-center dark:text-immich-dark-fg">登录已被禁用.</p>
 {/if}

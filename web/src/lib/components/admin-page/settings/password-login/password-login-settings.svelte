@@ -49,9 +49,9 @@
     <form autocomplete="off" on:submit|preventDefault>
       <div class="ml-4 mt-4 flex flex-col">
         <SettingSwitch
-          title="ENABLED"
+          title="启用"
           {disabled}
-          subtitle="Login with email and password"
+          subtitle="使用电子邮件和密码登录"
           bind:checked={config.passwordLogin.enabled}
         />
 

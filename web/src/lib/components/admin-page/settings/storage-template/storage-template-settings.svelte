@@ -84,9 +84,9 @@
   {#await getTemplateOptions() then}
     <div id="directory-path-builder" class="flex flex-col gap-4 {minified ? '' : 'ml-4 mt-4'}">
       <SettingSwitch
-        title="ENABLED"
+        title="启用"
         {disabled}
-        subtitle="Enable storage template engine"
+        subtitle="启用存储模板引擎"
         bind:checked={config.storageTemplate.enabled}
         isEdited={!(config.storageTemplate.enabled === savedConfig.storageTemplate.enabled)}
       />
@@ -95,7 +95,7 @@
         <SettingSwitch
           title="HASH VERIFICATION ENABLED"
           {disabled}
-          subtitle="Enables hash verification, don't disable this unless you're certain of the implications"
+          subtitle="启用哈希验证，除非您确定其含义，否则请勿禁用此功能"
           bind:checked={config.storageTemplate.hashVerificationEnabled}
           isEdited={!(
             config.storageTemplate.hashVerificationEnabled === savedConfig.storageTemplate.hashVerificationEnabled
@@ -106,7 +106,7 @@
       {#if config.storageTemplate.enabled}
         <hr />
 
-        <h3 class="text-base font-medium text-immich-primary dark:text-immich-dark-primary">Variables</h3>
+        <h3 class="text-base font-medium text-immich-primary dark:text-immich-dark-primary">变量</h3>
 
         <section class="support-date">
           {#await getSupportDateTimeFormat()}
@@ -123,22 +123,22 @@
         </section>
 
         <div class="flex flex-col mt-4">
-          <h3 class="text-base font-medium text-immich-primary dark:text-immich-dark-primary">Template</h3>
+          <h3 class="text-base font-medium text-immich-primary dark:text-immich-dark-primary">模板</h3>
 
           <div class="my-2 text-sm">
-            <h4>PREVIEW</h4>
+            <h4>预览</h4>
           </div>
 
           <p class="text-sm">
-            Approximately path length limit : <span
+            路径长度限制 : <span
               class="font-semibold text-immich-primary dark:text-immich-dark-primary"
               >{parsedTemplate().length + $user.id.length + 'UPLOAD_LOCATION'.length}</span
             >/260
           </p>
 
           <p class="text-sm">
-            <code class="text-immich-primary dark:text-immich-dark-primary">{$user.storageLabel || $user.id}</code> is the
-            user's Storage Label
+            <code class="text-immich-primary dark:text-immich-dark-primary">{$user.storageLabel || $user.id}</code> 是
+            用户的存储标签
           </p>
 
           <p class="p-4 py-2 mt-2 text-xs bg-gray-200 rounded-lg dark:bg-gray-700 dark:text-immich-dark-fg">
@@ -180,23 +180,23 @@
 
             {#if !minified}
               <div id="migration-info" class="mt-2 text-sm">
-                <h3 class="text-base font-medium text-immich-primary dark:text-immich-dark-primary">Notes</h3>
+                <h3 class="text-base font-medium text-immich-primary dark:text-immich-dark-primary">提示</h3>
                 <section class="flex flex-col gap-2">
                   <p>
-                    Template changes will only apply to new assets. To retroactively apply the template to previously
-                    uploaded assets, run the
+                    模板更改仅适用于新资源。 要将模板追溯应用到之前
+                    上传的资产，请运行
                     <a href="/admin/jobs-status" class="text-immich-primary dark:text-immich-dark-primary"
-                      >Storage Migration Job</a
+                      >存储迁移作业</a
                     >.
                   </p>
                   <p>
-                    The template variable <span class="font-mono">{`{{album}}`}</span> will always be empty for new
-                    assets, so manually running the
+                    新资源的模板变量 <span class="font-mono">{`{{album}}`}</span> 将始终为空，
+                    因此手动运行
 
                     <a href="/admin/jobs-status" class="text-immich-primary dark:text-immich-dark-primary"
-                      >Storage Migration Job</a
+                      >存储迁移作业</a
                     >
-                    is required in order to successfully use the variable.
+                    是必要的，为了成功使用该变量.
                   </p>
                 </section>
               </div>

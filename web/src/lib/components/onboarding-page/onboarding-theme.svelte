@@ -15,10 +15,10 @@
 </script>
 
 <OnboardingCard>
-  <p class="text-xl text-immich-primary dark:text-immich-dark-primary">COLOR THEME</p>
+  <p class="text-xl text-immich-primary dark:text-immich-dark-primary">主题色彩</p>
 
   <div>
-    <p class="pb-6 font-light">Choose a color theme for your instance. You can change this later in your settings.</p>
+    <p class="pb-6 font-light">为您的实例选择颜色主题。 您可以稍后在设置中更改此设置.</p>
   </div>
 
   <div class="flex gap-4 mb-6">
@@ -49,7 +49,7 @@
   <div class="flex">
     <div class="w-full flex place-content-end">
       <Button class="flex gap-2 place-content-center" on:click={() => dispatch('done')}>
-        <p>Storage Template</p>
+        <p>存储模板</p>
         <Icon path={mdiArrowRight} size="18" />
       </Button>
     </div>

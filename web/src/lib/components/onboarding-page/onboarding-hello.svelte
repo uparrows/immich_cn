@@ -15,13 +15,13 @@
 <OnboardingCard>
   <ImmichLogo class="w-12 h-12" />
   <p class="font-medium text-6xl my-6 text-immich-primary dark:text-immich-dark-primary">
-    Welcome, {$user.name}
+    欢迎, {$user.name}
   </p>
-  <p class="text-3xl pb-6 font-light">Let's get your instance set up with some common settings.</p>
+  <p class="text-3xl pb-6 font-light">让我们使用一些常见设置来设置您的实例.</p>
 
   <div class="w-full flex place-content-end">
     <Button class="flex gap-2 place-content-center" on:click={() => dispatch('done')}>
-      <p>Theme</p>
+      <p>主题</p>
       <Icon path={mdiArrowRight} size="18" />
     </Button>
   </div>

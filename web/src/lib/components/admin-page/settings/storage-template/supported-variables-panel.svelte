@@ -1,5 +1,5 @@
 <div class="mt-4 text-sm">
-  <h4>OTHER VARIABLES</h4>
+  <h4>其他变量</h4>
 </div>
 
 <div class="p-4 mt-2 text-xs bg-gray-200 rounded-lg dark:bg-gray-700 dark:text-immich-dark-fg">

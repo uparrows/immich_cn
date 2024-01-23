@@ -23,7 +23,7 @@
     <form autocomplete="off" on:submit|preventDefault class="mx-4 mt-4">
       <div class="flex flex-col gap-4">
         <SettingSwitch
-          title="ENABLED"
+          title="启用"
           subtitle="If disabled, all ML features will be disabled regardless of the below settings."
           {disabled}
           bind:checked={config.machineLearning.enabled}
@@ -45,7 +45,7 @@
       <SettingAccordion title="Smart Search" subtitle="Search for images semantically using CLIP embeddings">
         <div class="ml-4 mt-4 flex flex-col gap-4">
           <SettingSwitch
-            title="ENABLED"
+            title="启用"
             subtitle="If disabled, images will not be encoded for smart search."
             bind:checked={config.machineLearning.clip.enabled}
             disabled={disabled || !config.machineLearning.enabled}
@@ -72,7 +72,7 @@
       <SettingAccordion title="Facial Recognition" subtitle="Detect, recognize and group faces in images">
         <div class="ml-4 mt-4 flex flex-col gap-4">
           <SettingSwitch
-            title="ENABLED"
+            title="启用"
             subtitle="If disabled, images will not be encoded for facial recognition and will not populate the People section in the Explore page."
             bind:checked={config.machineLearning.facialRecognition.enabled}
             disabled={disabled || !config.machineLearning.enabled}
