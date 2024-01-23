@@ -87,7 +87,7 @@
       <Icon path={mdiDns} size="26" />
     </div>
     <div class="hidden text-xs group-hover:sm:block md:block">
-      <p class="text-sm font-medium text-immich-primary dark:text-immich-dark-primary">Server</p>
+      <p class="text-sm font-medium text-immich-primary dark:text-immich-dark-primary">服务器</p>
 
       <div class="mt-2 flex justify-between justify-items-center">
         <p>状态</p>

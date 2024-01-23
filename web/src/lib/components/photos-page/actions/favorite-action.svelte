@@ -16,7 +16,7 @@
   export let menuItem = false;
   export let removeFavorite: boolean;
 
-  $: text = removeFavorite ? '从收藏夹中移除' : '添加到收藏';
+  $: text = removeFavorite ? '移除收藏' : '收藏';
   $: icon = removeFavorite ? mdiHeartMinusOutline : mdiHeartOutline;
 
   let loading = false;

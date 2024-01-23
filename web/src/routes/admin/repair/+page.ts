@@ -12,7 +12,7 @@ export const load = (async () => {
     orphans,
     extras,
     meta: {
-      title: 'Repair',
+      title: '修复',
     },
   };
 }) satisfies PageLoad;

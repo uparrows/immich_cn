@@ -501,7 +501,7 @@
                     {#if viewMode === ViewMode.ALBUM_OPTIONS}
                       <ContextMenu {...contextMenuPosition}>
                         {#if album.assetCount !== 0}
-                          <MenuOption on:click={handleStartSlideshow} text="Slideshow" />
+                          <MenuOption on:click={handleStartSlideshow} text="幻灯片" />
                         {/if}
                         <MenuOption on:click={() => (viewMode = ViewMode.SELECT_THUMBNAIL)} text="设置相册封面" />
                         <MenuOption on:click={() => (viewMode = ViewMode.OPTIONS)} text="选项" />
@@ -543,7 +543,7 @@
               on:click={handleSelectFromComputer}
               class="rounded-lg px-6 py-2 text-sm font-medium text-immich-primary transition-all hover:bg-immich-primary/10 dark:text-immich-dark-primary dark:hover:bg-immich-dark-primary/25"
             >
-              Select from computer
+              从计算机中选择
             </button>
             <Button size="sm" rounded="lg" disabled={$timelineSelected.size === 0} on:click={handleAddAssets}
               >Done</Button
@@ -554,7 +554,7 @@
 
       {#if viewMode === ViewMode.SELECT_THUMBNAIL}
         <ControlAppBar on:close={() => (viewMode = ViewMode.VIEW)}>
-          <svelte:fragment slot="leading">Select Album Cover</svelte:fragment>
+          <svelte:fragment slot="leading">选择相册封面</svelte:fragment>
         </ControlAppBar>
       {/if}
     {/if}
@@ -635,7 +635,7 @@
                       size="20"
                       icon={mdiPlus}
                       on:click={() => (viewMode = ViewMode.SELECT_USERS)}
-                      title="Add more users"
+                      title="添加更多用户"
                     />
                   {/if}
                 </div>
@@ -648,7 +648,7 @@
                   on:click={() => (isEditingDescription = true)}
                   class:hover:border-gray-400={isOwned}
                   disabled={!isOwned}
-                  title="Edit description"
+                  title="编辑描述"
                 >
                   <textarea
                     class="w-full bg-transparent resize-none overflow-hidden outline-none"
@@ -741,14 +741,14 @@
 
 {#if viewMode === ViewMode.CONFIRM_DELETE}
   <ConfirmDialogue
-    title="Delete album"
-    confirmText="Delete"
+    title="删除相册"
+    confirmText="删除"
     on:confirm={handleRemoveAlbum}
     on:cancel={() => (viewMode = ViewMode.VIEW)}
   >
     <svelte:fragment slot="prompt">
-      <p>Are you sure you want to delete the album <b>{album.albumName}</b>?</p>
-      <p>If this album is shared, other users will not be able to access it anymore.</p>
+      <p>您确定要删除该相册吗 <b>{album.albumName}</b>?</p>
+      <p>如果此相册被共享，其他用户将无法再访问它.</p>
     </svelte:fragment>
   </ConfirmDialogue>
 {/if}

@@ -21,8 +21,8 @@ export const load = (async () => {
 
   return {
     meta: {
-      title: 'Welcome 🎉',
-      description: 'Immich Web Interface',
+      title: '欢迎 🎉',
+      description: 'Immich 网页界面',
     },
   };
 }) satisfies PageLoad;

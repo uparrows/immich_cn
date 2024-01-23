@@ -277,10 +277,10 @@
       <div class="flex place-items-center gap-2 text-sm">
         {#if $albumViewSettings.view === AlbumViewMode.List}
           <Icon path={mdiViewGridOutline} size="18" />
-          <p class="hidden sm:block">封面</p>
+          <p class="hidden sm:block">Cover</p>
         {:else}
           <Icon path={mdiFormatListBulletedSquare} size="18" />
-          <p class="hidden sm:block">列表</p>
+          <p class="hidden sm:block">List</p>
         {/if}
       </div>
     </LinkButton>
@@ -386,7 +386,7 @@
     <MenuOption on:click={() => setAlbumToDelete()}>
       <span class="flex place-content-center place-items-center gap-2">
         <Icon path={mdiDeleteOutline} size="18" />
-        <p>Delete album</p>
+        <p>删除相册</p>
       </span>
     </MenuOption>
   </ContextMenu>
@@ -394,14 +394,14 @@
 
 {#if albumToDelete}
   <ConfirmDialogue
-    title="Delete Album"
-    confirmText="Delete"
+    title="删除相册"
+    confirmText="删除"
     on:confirm={deleteSelectedAlbum}
     on:cancel={() => (albumToDelete = null)}
   >
     <svelte:fragment slot="prompt">
-      <p>Are you sure you want to delete the album <b>{albumToDelete.albumName}</b>?</p>
-      <p>If this album is shared, other users will not be able to access it anymore.</p>
+      <p>您确定要删除该相册吗 <b>{albumToDelete.albumName}</b>?</p>
+      <p>如果此相册被共享，其他用户将无法再访问它.</p>
     </svelte:fragment>
   </ConfirmDialogue>
 {/if}

@@ -9,7 +9,7 @@ export const load = (async () => {
   return {
     configs,
     meta: {
-      title: 'System Settings',
+      title: '系统设置',
     },
   };
 }) satisfies PageLoad;

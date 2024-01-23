@@ -12,7 +12,7 @@ export const load = (async () => {
 
   return {
     meta: {
-      title: 'Admin Registration',
+      title: '管理员注册',
     },
   };
 }) satisfies PageLoad;

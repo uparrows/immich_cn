@@ -12,7 +12,7 @@ export const load = (async () => {
 
   return {
     meta: {
-      title: 'Change Password',
+      title: '修改密码',
     },
   };
 }) satisfies PageLoad;

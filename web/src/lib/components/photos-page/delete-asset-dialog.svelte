@@ -25,25 +25,25 @@
 </script>
 
 <ConfirmDialogue
-  title="Permanently Delete Asset{size > 1 ? 's' : ''}"
-  confirmText="Delete"
+  title="永久删除资源{size > 1 ? 's' : ''}"
+  confirmText="删除"
   on:confirm={handleConfirm}
   on:cancel={() => dispatch('cancel')}
   on:escape={() => dispatch('cancel')}
 >
   <svelte:fragment slot="prompt">
     <p>
-      Are you sure you want to permanently delete
+      您确定要永久删除
       {#if size > 1}
-        these <b>{size}</b> assets? This will also remove them from their album(s).
+        这些 <b>{size}</b> 资源? 这也会将他们从相册中删除.
       {:else}
-        this asset? This will also remove it from its album(s).
+        该资源? 这也会将他们从相册中删除.
       {/if}
     </p>
-    <p><b>You cannot undo this action!</b></p>
+    <p><b>您无法撤消此操作!</b></p>
 
     <div class="flex gap-2 items-center justify-center pt-4">
-      <label id="confirm-label" for="confirm-input">Do not show this message again</label>
+      <label id="confirm-label" for="confirm-input">不再显示此消息</label>
       <input
         id="confirm-input"
         aria-labelledby="confirm-input"

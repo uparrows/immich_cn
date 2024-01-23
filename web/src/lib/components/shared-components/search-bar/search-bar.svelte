@@ -94,7 +94,7 @@
           : 'dark:bg-immich-dark-bg'} px-14 py-4 text-immich-fg/75 dark:text-immich-dark-fg {showBigSearchBar
           ? 'rounded-t-3xl border  border-gray-200 bg-white dark:border-gray-800'
           : 'rounded-3xl border border-transparent bg-gray-200'}"
-        placeholder="Search your photos"
+        placeholder="查找你的照片"
         required
         pattern="^(?!m:$).*$"
         bind:value
@@ -134,7 +134,7 @@
               <button
                 type="button"
                 class="rounded-lg p-2 font-semibold text-immich-primary hover:bg-immich-primary/25 dark:text-immich-dark-primary"
-                on:click={clearAllSearchTerms}>Clear all</button
+                on:click={clearAllSearchTerms}>清除全部</button
               >
             </div>
           </div>

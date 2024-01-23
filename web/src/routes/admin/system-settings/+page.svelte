@@ -44,86 +44,86 @@
   const settings = [
     {
       item: JobSettings,
-      title: 'Job Settings',
-      subtitle: 'Manage job concurrency',
+      title: '作业设定',
+      subtitle: '管理作业并发',
       isOpen: openSettings.includes('job'),
     },
     {
       item: LibrarySettings,
-      title: 'Library',
-      subtitle: 'Manage library settings',
+      title: '资源库',
+      subtitle: '管理资源库设置',
       isOpen: openSettings.includes('library'),
     },
     {
       item: LoggingSettings,
-      title: 'Logging',
-      subtitle: 'Manage log settings',
+      title: '登录',
+      subtitle: '管理登录设置',
       isOpen: openSettings.includes('logging'),
     },
     {
       item: MachineLearningSettings,
-      title: 'Machine Learning Settings',
-      subtitle: 'Manage machine learning features and settings',
+      title: '机器学习设置',
+      subtitle: '管理机器学习功能和设置',
       isOpen: openSettings.includes('machineLearning'),
     },
     {
       item: MapSettings,
-      title: 'Map & GPS Settings',
-      subtitle: 'Manage map related features and setting',
+      title: '地图和GPS设置',
+      subtitle: '管理地图相关功能和设置',
       isOpen: openSettings.some((key) => ['map', 'reverseGeocoding'].includes(key)),
     },
     {
       item: OAuthSettings,
-      title: 'OAuth Authentication',
-      subtitle: 'Manage the login with OAuth settings',
+      title: 'OAuth认证',
+      subtitle: '管理OAuth登录',
       isOpen: openSettings.includes('oauth'),
     },
     {
       item: PasswordLoginSettings,
-      title: 'Password Authentication',
-      subtitle: 'Manage the login with password settings',
+      title: '密码认证',
+      subtitle: '使用密码设置管理登录',
       isOpen: openSettings.includes('passwordLogin'),
     },
     {
       item: ServerSettings,
-      title: 'Server Settings',
-      subtitle: 'Manage server settings',
+      title: '服务器设置',
+      subtitle: '管理服务器设置',
       isOpen: openSettings.includes('server'),
     },
     {
       item: StorageTemplateSettings,
-      title: 'Storage Template',
-      subtitle: 'Manage the folder structure and file name of the upload asset',
+      title: '存储模板',
+      subtitle: '管理上传资源的文件夹结构和文件名',
       isOpen: openSettings.includes('storageTemplate'),
     },
     {
       item: ThemeSettings,
-      title: 'Theme Settings',
-      subtitle: 'Manage customization of the Immich web interface',
+      title: '主题设置',
+      subtitle: '管理 Immich 网络界面的定制',
       isOpen: openSettings.includes('theme'),
     },
     {
       item: ThumbnailSettings,
-      title: 'Thumbnail Settings',
-      subtitle: 'Manage the resolution of thumbnail sizes',
+      title: '缩略图设置',
+      subtitle: '管理缩略图大小的分辨率',
       isOpen: openSettings.includes('thumbnail'),
     },
     {
       item: TrashSettings,
-      title: 'Trash Settings',
-      subtitle: 'Manage trash settings',
+      title: '回收站设置',
+      subtitle: '管理回收站设置',
       isOpen: openSettings.includes('trash'),
     },
     {
       item: NewVersionCheckSettings,
-      title: 'Version Check',
-      subtitle: 'Enable/disable the new version notification',
+      title: '版本检查',
+      subtitle: '启用/禁用新版本通知',
       isOpen: openSettings.includes('newVersionCheck'),
     },
     {
       item: FFmpegSettings,
-      title: 'Video Transcoding Settings',
-      subtitle: 'Manage the resolution and encoding information of the video files',
+      title: '视频转码设置',
+      subtitle: '管理视频文件的分辨率和编码信息',
       isOpen: openSettings.includes('ffmpeg'),
     },
   ];
@@ -132,7 +132,7 @@
 {#if $featureFlags.configFile}
   <div class="mb-8 flex flex-row items-center gap-2 rounded-md bg-gray-100 p-3 dark:bg-gray-800">
     <Icon path={mdiAlert} class="text-yellow-400" size={18} />
-    <h2 class="text-md text-immich-primary dark:text-immich-dark-primary">Config is currently set by a config file</h2>
+    <h2 class="text-md text-immich-primary dark:text-immich-dark-primary">配置当前由配置文件设置</h2>
   </div>
 {/if}
 
@@ -141,13 +141,13 @@
     <LinkButton on:click={() => copyToClipboard(JSON.stringify(config, null, 2))}>
       <div class="flex place-items-center gap-2 text-sm">
         <Icon path={mdiContentCopy} size="18" />
-        Copy to Clipboard
+        复制到剪贴板
       </div>
     </LinkButton>
     <LinkButton on:click={() => downloadConfig()}>
       <div class="flex place-items-center gap-2 text-sm">
         <Icon path={mdiDownload} size="18" />
-        Export as JSON
+        导出为 JSON
       </div>
     </LinkButton>
   </div>

@@ -7,7 +7,7 @@ export const load = (async () => {
   await loadConfig();
   return {
     meta: {
-      title: 'Onboarding',
+      title: '入门',
     },
   };
 }) satisfies PageLoad;

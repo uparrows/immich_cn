@@ -87,12 +87,12 @@ export const sidebarSettings = persisted<SidebarSettings>('sidebar-settings-1', 
 });
 
 export enum AlbumViewMode {
-  Cover = 'Cover',
-  List = 'List',
+  Cover = '封面',
+  List = '列表',
 }
 
 export const albumViewSettings = persisted<AlbumViewSettings>('album-view-settings', {
-  sortBy: 'Most recent photo',
+  sortBy: '最新的照片',
   sortDesc: true,
   view: AlbumViewMode.Cover,
 });

@@ -157,18 +157,18 @@
           on:escape={() => (shouldShowInfoPanel = false)}
         >
           <div class="w-[500px] max-w-[95vw] rounded-3xl border bg-white p-8 text-sm shadow-sm">
-            <h1 class="mb-4 text-lg font-medium text-immich-primary">Password reset success</h1>
+            <h1 class="mb-4 text-lg font-medium text-immich-primary">密码重置成功</h1>
 
             <p>
-              The user's password has been reset to the default <code
+              用户密码已重置为默认 <code
                 class="rounded-md bg-gray-200 px-2 py-1 font-bold text-immich-primary">password</code
               >
               <br />
-              Please inform the user, and they will need to change the password at the next log-on.
+              请告知用户，下次登录时需要更改密码.
             </p>
 
             <div class="mt-6 flex w-full">
-              <Button fullwidth on:click={() => (shouldShowInfoPanel = false)}>Done</Button>
+              <Button fullwidth on:click={() => (shouldShowInfoPanel = false)}>完成</Button>
             </div>
           </div>
         </FullScreenModal>
@@ -179,11 +179,11 @@
           class="mb-4 flex h-12 w-full rounded-md border bg-gray-50 text-immich-primary dark:border-immich-dark-gray dark:bg-immich-dark-gray dark:text-immich-dark-primary"
         >
           <tr class="flex w-full place-items-center">
-            <th class="w-8/12 sm:w-5/12 lg:w-6/12 xl:w-4/12 2xl:w-5/12 text-center text-sm font-medium">Email</th>
-            <th class="hidden sm:block w-3/12 text-center text-sm font-medium">Name</th>
-            <th class="hidden xl:block w-3/12 2xl:w-2/12 text-center text-sm font-medium">Has quota</th>
-            <th class="hidden xl:block w-3/12 2xl:w-2/12 text-center text-sm font-medium">Can import</th>
-            <th class="w-4/12 lg:w-3/12 xl:w-2/12 text-center text-sm font-medium">Action</th>
+            <th class="w-8/12 sm:w-5/12 lg:w-6/12 xl:w-4/12 2xl:w-5/12 text-center text-sm font-medium">邮件</th>
+            <th class="hidden sm:block w-3/12 text-center text-sm font-medium">名称</th>
+            <th class="hidden xl:block w-3/12 2xl:w-2/12 text-center text-sm font-medium">配额</th>
+            <th class="hidden xl:block w-3/12 2xl:w-2/12 text-center text-sm font-medium">可以导入</th>
+            <th class="w-4/12 lg:w-3/12 xl:w-2/12 text-center text-sm font-medium">操作</th>
           </tr>
         </thead>
         <tbody class="block max-h-[320px] w-full overflow-y-auto rounded-md border dark:border-immich-dark-gray">
@@ -254,7 +254,7 @@
         </tbody>
       </table>
 
-      <Button size="sm" on:click={() => (shouldShowCreateUserForm = true)}>Create user</Button>
+      <Button size="sm" on:click={() => (shouldShowCreateUserForm = true)}>创建用户</Button>
     </section>
   </section>
 </UserPageLayout>

@@ -9,7 +9,7 @@ export const load = (async () => {
   return {
     allUsers,
     meta: {
-      title: 'User Management',
+      title: '用户管理',
     },
   };
 }) satisfies PageLoad;

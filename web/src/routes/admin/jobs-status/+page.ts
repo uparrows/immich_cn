@@ -10,7 +10,7 @@ export const load = (async () => {
   return {
     jobs,
     meta: {
-      title: 'Job Status',
+      title: '工作状态',
     },
   };
 }) satisfies PageLoad;

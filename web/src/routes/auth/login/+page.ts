@@ -12,7 +12,7 @@ export const load = (async () => {
 
   return {
     meta: {
-      title: 'Login',
+      title: '登录',
     },
   };
 }) satisfies PageLoad;

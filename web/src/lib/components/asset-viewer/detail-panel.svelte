@@ -147,7 +147,7 @@
     try {
       await api.assetApi.updateAsset({ id: asset.id, updateAssetDto: { dateTimeOriginal } });
     } catch (error) {
-      handleError(error, 'Unable to change date');
+      handleError(error, '无法更改日期');
     }
   }
 
@@ -165,7 +165,7 @@
         },
       });
     } catch (error) {
-      handleError(error, 'Unable to change location');
+      handleError(error, '无法更改位置');
     }
   }
 </script>
@@ -179,7 +179,7 @@
       <Icon path={mdiClose} size="24" />
     </button>
 
-    <p class="text-lg text-immich-fg dark:text-immich-dark-fg">Info</p>
+    <p class="text-lg text-immich-fg dark:text-immich-dark-fg">信息</p>
   </div>
 
   {#if asset.isOffline}
@@ -188,8 +188,8 @@
         <div class="rounded-t bg-red-500 px-4 py-2 font-bold text-white">Asset offline</div>
         <div class="rounded-b border border-t-0 border-red-400 bg-red-100 px-4 py-3 text-red-700">
           <p>
-            This asset is offline. Immich can not access its file location. Please ensure the asset is available and
-            then rescan the library.
+            该资源已离线。 Immich 无法访问其文件位置。 请确保资源可用
+            然后重新扫描库.
           </p>
         </div>
       </div>
@@ -204,7 +204,7 @@
         bind:this={textarea}
         class="max-h-[500px]
       w-full resize-none overflow-hidden border-b border-gray-500 bg-transparent text-base text-black outline-none transition-all focus:border-b-2 focus:border-immich-primary disabled:border-none dark:text-white dark:focus:border-immich-dark-primary"
-        placeholder={!isOwner ? '' : 'Add a description'}
+        placeholder={!isOwner ? '' : '添加描述'}
         on:focusin={handleFocusIn}
         on:focusout={handleFocusOut}
         on:input={autoGrowHeight}
@@ -305,17 +305,17 @@
 
   <div class="px-4 py-4">
     {#if !asset.exifInfo && !asset.isExternal}
-      <p class="text-sm">NO EXIF INFO AVAILABLE</p>
+      <p class="text-sm">没有可用的 EXIF 信息</p>
     {:else if !asset.exifInfo && asset.isExternal}
       <div class="flex gap-4 py-4">
         <div>
           <p class="break-all">
-            Metadata not loaded for {asset.originalPath}
+            未加载元数据 {asset.originalPath}
           </p>
         </div>
       </div>
     {:else}
-      <p class="text-sm">DETAILS</p>
+      <p class="text-sm">详情</p>
     {/if}
 
     {#if asset.exifInfo?.dateTimeOriginal && !asset.isReadOnly}
@@ -328,7 +328,7 @@
         role="button"
         on:click={() => (isOwner ? (isShowChangeDate = true) : null)}
         on:keydown={(event) => (isOwner ? event.key === 'Enter' && (isShowChangeDate = true) : null)}
-        title={isOwner ? 'Edit date' : ''}
+        title={isOwner ? '编辑日期' : ''}
         class:hover:dark:text-immich-dark-primary={isOwner}
         class:hover:text-immich-primary={isOwner}
       >
@@ -441,7 +441,7 @@
           <p class="break-all flex place-items-center gap-2">
             {#if isOwner}
               {asset.originalFileName}
-              <button title="Show File Location" on:click={toggleAssetPath}>
+              <button title="显示文件位置" on:click={toggleAssetPath}>
                 <Icon path={mdiInformationOutline} />
               </button>
             {:else}
@@ -504,7 +504,7 @@
         on:click={() => (isOwner ? (isShowChangeLocation = true) : null)}
         on:keydown={(event) => (isOwner ? event.key === 'Enter' && (isShowChangeLocation = true) : null)}
         tabindex="0"
-        title={isOwner ? 'Edit location' : ''}
+        title={isOwner ? '编辑位置' : ''}
         role="button"
         class:hover:dark:text-immich-dark-primary={isOwner}
         class:hover:text-immich-primary={isOwner}
@@ -540,14 +540,14 @@
         on:keydown={(event) => event.key === 'Enter' && (isShowChangeLocation = true)}
         tabindex="0"
         role="button"
-        title="Add location"
+        title="添加位置"
       >
         <div class="flex gap-4">
           <div>
             <div><Icon path={mdiMapMarkerOutline} size="24" /></div>
           </div>
 
-          <p>Add a location</p>
+          <p>添加位置</p>
         </div>
         <div class="focus:outline-none p-1">
           <Icon path={mdiPencil} size="20" />
@@ -612,7 +612,7 @@
 
 {#if asset.owner && !isOwner}
   <section class="px-6 pt-6 dark:text-immich-dark-fg">
-    <p class="text-sm">SHARED BY</p>
+    <p class="text-sm">共享于</p>
     <div class="flex gap-4 pt-4">
       <div>
         <UserAvatar user={asset.owner} size="md" />
@@ -629,7 +629,7 @@
 
 {#if albums.length > 0}
   <section class="p-6 dark:text-immich-dark-fg">
-    <p class="pb-4 text-sm">APPEARS IN</p>
+    <p class="pb-4 text-sm">出现在</p>
     {#each albums as album}
       <a data-sveltekit-preload-data="hover" href={`/albums/${album.id}`}>
         <!-- svelte-ignore a11y-no-static-element-interactions -->

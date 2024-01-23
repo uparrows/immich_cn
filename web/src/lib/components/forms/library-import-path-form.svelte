@@ -35,20 +35,20 @@
 
     <form on:submit|preventDefault={() => handleSubmit()} autocomplete="off">
       <p class="p-5 text-sm">
-        Specify a folder to import. This folder, including subfolders, will be scanned for images and videos. Note that
-        you are only allowed to import paths inside of your account's external path, configured in the administrative
-        settings.
+        指定要导入的文件夹。 将扫描此文件夹（包括子文件夹）中的图像和视频。
+        请注意，您只能导入在管理设置中配置的帐户外部路径内部的
+        路径。
       </p>
 
       <div class="m-4 flex flex-col gap-2">
-        <label class="immich-form-label" for="path">Path</label>
+        <label class="immich-form-label" for="path">路径</label>
         <input class="immich-form-input" id="path" name="path" type="text" bind:value={importPath} />
       </div>
 
       <div class="mt-8 flex w-full gap-4 px-4">
         <Button color="gray" fullwidth on:click={() => handleCancel()}>{cancelText}</Button>
         {#if canDelete}
-          <Button color="red" fullwidth on:click={() => dispatch('delete')}>Delete</Button>
+          <Button color="red" fullwidth on:click={() => dispatch('delete')}>删除</Button>
         {/if}
 
         <Button type="submit" fullwidth>{submitText}</Button>

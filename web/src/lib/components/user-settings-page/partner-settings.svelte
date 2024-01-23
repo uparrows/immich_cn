@@ -78,7 +78,7 @@
       removePartner = null;
       await refreshPartners();
     } catch (error) {
-      handleError(error, 'Unable to remove partner');
+      handleError(error, '无法移除成员');
     }
   };
 
@@ -91,7 +91,7 @@
       await refreshPartners();
       createPartner = false;
     } catch (error) {
-      handleError(error, 'Unable to add partners');
+      handleError(error, '无法添加成员');
     }
   };
 
@@ -102,7 +102,7 @@
       partner.inTimeline = inTimeline;
       partners = partners;
     } catch (error) {
-      handleError(error, 'Unable to update timeline display status');
+      handleError(error, '无法更新时间线显示状态');
     }
   };
 </script>
@@ -129,7 +129,7 @@
               on:click={() => (removePartner = partner.user)}
               icon={mdiClose}
               size={'16'}
-              title="Stop sharing your photos with this user"
+              title="停止与该用户分享您的照片"
             />
           {/if}
         </div>
@@ -142,10 +142,10 @@
             <p class="text-md">{partner.user.name} can access</p>
             <ul class="text-sm">
               <li class="flex gap-2 place-items-center py-1 mt-2">
-                <Icon path={mdiCheck} /> All your photos and videos except those in Archived and Deleted
+                <Icon path={mdiCheck} /> 除“已存档”和“已删除”中的照片和视频外的所有照片和视频
               </li>
               <li class="flex gap-2 place-items-center py-1">
-                <Icon path={mdiCheck} /> The location where your photos were taken
+                <Icon path={mdiCheck} /> 您的照片拍摄地点
               </li>
             </ul>
           {/if}
@@ -155,8 +155,8 @@
             <hr class="my-4 border border-gray-200 dark:border-gray-700" />
             <p class="text-xs font-medium my-4">PHOTOS FROM {partner.user.name.toUpperCase()}</p>
             <SettingSwitch
-              title="Show in timeline"
-              subtitle="Show photos and videos from this user in your timeline"
+              title="在时间线中显示"
+              subtitle="在您的时间线中显示该人物的照片和视频"
               bind:checked={partner.inTimeline}
               on:toggle={({ detail }) => handleShowOnTimelineChanged(partner, detail)}
             />
@@ -167,7 +167,7 @@
   {/if}
 
   <div class="flex justify-end mt-5">
-    <Button size="sm" on:click={() => (createPartner = true)}>Add partner</Button>
+    <Button size="sm" on:click={() => (createPartner = true)}>添加成员</Button>
   </div>
 </section>
 
@@ -181,8 +181,8 @@
 
 {#if removePartner}
   <ConfirmDialogue
-    title="Stop sharing your photos?"
-    prompt="{removePartner.name} will no longer be able to access your photos."
+    title="停止共享您的照片?"
+    prompt="{removePartner.name} 将无法再访问您的照片."
     on:cancel={() => (removePartner = null)}
     on:confirm={() => handleRemovePartner()}
   />

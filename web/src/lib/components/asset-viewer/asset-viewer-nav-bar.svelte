@@ -111,7 +111,7 @@
         isOpacity={true}
         hideMobile={true}
         icon={$photoZoomState && $photoZoomState.currentZoom > 1 ? mdiMagnifyMinusOutline : mdiMagnifyPlusOutline}
-        title="Zoom Image"
+        title="缩放图像"
         on:click={() => {
           const zoomImage = new CustomEvent('zoomImage');
           window.dispatchEvent(zoomImage);
@@ -122,7 +122,7 @@
       <CircleIconButton
         isOpacity={true}
         icon={mdiContentCopy}
-        title="Copy Image"
+        title="复制图像"
         on:click={() => {
           const copyEvent = new CustomEvent('copyImage');
           window.dispatchEvent(copyEvent);
@@ -135,7 +135,7 @@
         isOpacity={true}
         icon={mdiCloudDownloadOutline}
         on:click={() => dispatch('download')}
-        title="Download"
+        title="下载"
       />
     {/if}
     {#if showDetailButton}
@@ -143,7 +143,7 @@
         isOpacity={true}
         icon={mdiInformationOutline}
         on:click={() => dispatch('showDetail')}
-        title="Info"
+        title="信息"
       />
     {/if}
     {#if isOwner}
@@ -151,16 +151,16 @@
         isOpacity={true}
         icon={asset.isFavorite ? mdiHeart : mdiHeartOutline}
         on:click={() => dispatch('favorite')}
-        title={asset.isFavorite ? 'Unfavorite' : 'Favorite'}
+        title={asset.isFavorite ? '移除收藏' : '收藏'}
       />
     {/if}
 
     {#if isOwner}
       {#if !asset.isReadOnly || !asset.isExternal}
-        <CircleIconButton isOpacity={true} icon={mdiDeleteOutline} on:click={() => dispatch('delete')} title="Delete" />
+        <CircleIconButton isOpacity={true} icon={mdiDeleteOutline} on:click={() => dispatch('delete')} title="删除" />
       {/if}
       <div use:clickOutside on:outclick={() => (isShowAssetOptions = false)}>
-        <CircleIconButton isOpacity={true} icon={mdiDotsVertical} on:click={showOptionsMenu} title="More" />
+        <CircleIconButton isOpacity={true} icon={mdiDotsVertical} on:click={showOptionsMenu} title="更多" />
         {#if isShowAssetOptions}
           <ContextMenu {...contextMenuPosition} direction="left">
             {#if showSlideshow}

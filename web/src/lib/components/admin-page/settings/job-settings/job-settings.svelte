@@ -41,7 +41,7 @@
             <SettingInputField
               inputType={SettingInputFieldType.NUMBER}
               {disabled}
-              label="{api.getJobName(jobName)} Concurrency"
+              label="{api.getJobName(jobName)} 并发数"
               desc=""
               bind:value={config.job[jobName].concurrency}
               required={true}
@@ -50,7 +50,7 @@
           {:else}
             <SettingInputField
               inputType={SettingInputFieldType.NUMBER}
-              label="{api.getJobName(jobName)} Concurrency"
+              label="{api.getJobName(jobName)} 并发数"
               desc=""
               value="1"
               disabled={true}

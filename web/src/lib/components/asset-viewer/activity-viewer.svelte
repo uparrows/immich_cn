@@ -200,7 +200,7 @@
                 </div>
               {/if}
               {#if reaction.user.id === user.id || albumOwnerId === user.id}
-                <div class="flex items-start w-fit pt-[5px]" title="Delete comment">
+                <div class="flex items-start w-fit pt-[5px]" title="删除评论">
                   <button on:click={() => (!showDeleteReaction[index] ? showOptionsMenu(index) : '')}>
                     <Icon path={mdiDotsVertical} />
                   </button>
@@ -246,7 +246,7 @@
                   </div>
                 {/if}
                 {#if reaction.user.id === user.id || albumOwnerId === user.id}
-                  <div class="flex items-start w-fit" title="Delete like">
+                  <div class="flex items-start w-fit" title="删除喜欢">
                     <button on:click={() => (!showDeleteReaction[index] ? showOptionsMenu(index) : '')}>
                       <Icon path={mdiDotsVertical} />
                     </button>

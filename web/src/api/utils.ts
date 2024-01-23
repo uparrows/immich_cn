@@ -13,9 +13,9 @@ export type ApiError = AxiosError<{ message: string }>;
 export const copyToClipboard = async (secret: string) => {
   try {
     await navigator.clipboard.writeText(secret);
-    notificationController.show({ message: 'Copied to clipboard!', type: NotificationType.Info });
+    notificationController.show({ message: '已复制到剪贴板!', type: NotificationType.Info });
   } catch (error) {
-    handleError(error, 'Cannot copy to clipboard, make sure you are accessing the page through https');
+    handleError(error, '无法复制到剪贴板，请确保您通过 https 访问该页面');
   }
 };
 

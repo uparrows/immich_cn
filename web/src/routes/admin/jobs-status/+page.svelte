@@ -36,7 +36,7 @@
       <LinkButton>
         <div class="flex place-items-center gap-2 text-sm">
           <Icon path={mdiCog} size="18" />
-          Manage Concurrency
+          管理并发
         </div>
       </LinkButton>
     </a>

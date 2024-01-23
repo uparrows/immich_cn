@@ -78,12 +78,12 @@
 
       notificationController.show({
         type: NotificationType.Info,
-        message: `Repaired ${matches.length} items`,
+        message: `已修复 ${matches.length} 个条目`,
       });
 
       matches = [];
     } catch (error) {
-      handleError(error, 'Unable to repair items');
+      handleError(error, '无法修复项目');
     } finally {
       repairing = false;
     }
@@ -106,9 +106,9 @@
       orphans = report.orphans;
       extras = normalize(report.extras);
 
-      notificationController.show({ message: 'Refreshed', type: NotificationType.Info });
+      notificationController.show({ message: '已刷新', type: NotificationType.Info });
     } catch (error) {
-      handleError(error, 'Unable to load items');
+      handleError(error, '无法加载项目');
     }
   };
 
@@ -116,10 +116,10 @@
     try {
       const matched = await loadAndMatch([filename]);
       if (matched) {
-        notificationController.show({ message: `Matched 1 item`, type: NotificationType.Info });
+        notificationController.show({ message: `已匹配 1 项`, type: NotificationType.Info });
       }
     } catch (error) {
-      handleError(error, 'Unable to check item');
+      handleError(error, '无法检查项目');
     }
   };
 
@@ -135,12 +135,12 @@
         count += await loadAndMatch(filenames.slice(i, i + chunkSize));
       }
     } catch (error) {
-      handleError(error, 'Unable to check items');
+      handleError(error, '无法检查项目');
     } finally {
       checking = false;
     }
 
-    notificationController.show({ message: `Matched ${count} items`, type: NotificationType.Info });
+    notificationController.show({ message: `匹配 ${count} 项`, type: NotificationType.Info });
   };
 
   const loadAndMatch = async (filenames: string[]) => {
@@ -176,25 +176,25 @@
     <LinkButton on:click={() => handleRepair()} disabled={matches.length === 0 || repairing}>
       <div class="flex place-items-center gap-2 text-sm">
         <Icon path={mdiWrench} size="18" />
-        Repair All
+        修复全部
       </div>
     </LinkButton>
     <LinkButton on:click={() => handleCheckAll()} disabled={extras.length === 0 || checking}>
       <div class="flex place-items-center gap-2 text-sm">
         <Icon path={mdiCheckAll} size="18" />
-        Check All
+        检查全部
       </div>
     </LinkButton>
     <LinkButton on:click={() => handleDownload()} disabled={extras.length + orphans.length === 0}>
       <div class="flex place-items-center gap-2 text-sm">
         <Icon path={mdiDownload} size="18" />
-        Export
+        导出
       </div>
     </LinkButton>
     <LinkButton on:click={() => handleRefresh()}>
       <div class="flex place-items-center gap-2 text-sm">
         <Icon path={mdiRefresh} size="18" />
-        Refresh
+        刷新
       </div>
     </LinkButton>
   </div>
@@ -204,8 +204,8 @@
         <div class="w-full">
           <EmptyPlaceholder
             fullWidth
-            text="Untracked and missing files will show up here"
-            alt="Empty report"
+            text="未追踪和丢失的文件将显示在这里"
+            alt="记录为空"
             src={empty4Url}
           />
         </div>
@@ -219,7 +219,7 @@
                 <th class="w-full text-sm place-items-center font-medium flex justify-between" colspan="2">
                   <div class="px-3">
                     <p>MATCHES {matches.length ? `(${matches.length})` : ''}</p>
-                    <p class="text-gray-600 dark:text-gray-300 mt-1">These files are matched by their checksums</p>
+                    <p class="text-gray-600 dark:text-gray-300 mt-1">这些文件通过其校验和进行匹配</p>
                   </div>
                 </th>
               </tr>
@@ -254,7 +254,7 @@
                   <div class="px-3">
                     <p>OFFLINE PATHS {orphans.length ? `(${orphans.length})` : ''}</p>
                     <p class="text-gray-600 dark:text-gray-300 mt-1">
-                      These files are the results of manually deletion of the default upload library
+                      这些文件是手动删除默认上传库的结果
                     </p>
                   </div>
                 </th>
@@ -292,8 +292,8 @@
                   <div class="px-3">
                     <p>UNTRACKS FILES {extras.length ? `(${extras.length})` : ''}</p>
                     <p class="text-gray-600 dark:text-gray-300 mt-1">
-                      These files are not tracked by the application. They can be the results of failed moves,
-                      interrupted uploads, or left behind due to a bug
+                      应用程序不会跟踪这些文件。 它们可能是移动失败、
+                      上传中断或由于错误而遗留的结果
                     </p>
                   </div>
                 </th>

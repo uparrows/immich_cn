@@ -34,7 +34,7 @@
         <div>
           <div class="flex items-center justify-between gap-4 px-4 py-4">
             <h1 class="font-medium text-immich-primary dark:text-immich-dark-primary">
-              🚨 Error - Something went wrong
+              🚨 错误 - 出了问题
             </h1>
             <div class="flex justify-end">
               <button
@@ -82,7 +82,7 @@
             >
               <button class="flex flex-col place-content-center place-items-center gap-2">
                 <Icon path={mdiPartyPopper} size={24} />
-                <p class="text-sm">Read Changelog</p>
+                <p class="text-sm">阅读更新日志</p>
               </button>
             </a>
 
@@ -94,7 +94,7 @@
             >
               <button class="flex flex-col place-content-center place-items-center gap-2">
                 <Icon path={mdiCodeTags} size={24} />
-                <p class="text-sm">Check Logs</p>
+                <p class="text-sm">检查日志</p>
               </button>
             </a>
           </div>

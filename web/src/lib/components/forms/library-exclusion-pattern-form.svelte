@@ -26,19 +26,19 @@
       class="flex flex-col place-content-center place-items-center gap-4 px-4 text-immich-primary dark:text-immich-dark-primary"
     >
       <Icon path={mdiFolderRemove} size="4em" />
-      <h1 class="text-2xl font-medium text-immich-primary dark:text-immich-dark-primary">Add Exclusion pattern</h1>
+      <h1 class="text-2xl font-medium text-immich-primary dark:text-immich-dark-primary">添加排除模式</h1>
     </div>
 
     <form on:submit|preventDefault={() => handleSubmit()} autocomplete="off">
       <p class="p-5 text-sm">
-        Exclusion patterns lets you ignore files and folders when scanning your library. This is useful if you have
-        folders that contain files you don't want to import, such as RAW files.
+        排除模式允许您在扫描库时忽略文件和文件夹。 如果您的文件夹中包含
+        您不想导入的文件（例如 RAW 文件），此功能非常有用。
         <br /><br />
-        Add exclusion patterns. Globbing using *, **, and ? is supported. To ignore all files in any directory named "Raw",
-        use "**/Raw/**". To ignore all files ending in ".tif", use "**/*.tif". To ignore an absolute path, use "/path/to/ignore".
+        添加排除模式。 使用 *、** 和 ? 进行通配 是支持的。 要忽略任何名为“Raw”的目录中的所有文件，请使用“**/Raw/**”。
+        要忽略所有以“.tif”结尾的文件，请使用“**/*.tif”。 要忽略绝对路径，请使用“/path/to/ignore”
       </p>
       <div class="m-4 flex flex-col gap-2">
-        <label class="immich-form-label" for="exclusionPattern">Pattern</label>
+        <label class="immich-form-label" for="exclusionPattern">模式</label>
         <input
           class="immich-form-input"
           id="exclusionPattern"
@@ -48,9 +48,9 @@
         />
       </div>
       <div class="mt-8 flex w-full gap-4 px-4">
-        <Button color="gray" fullwidth on:click={() => handleCancel()}>Cancel</Button>
+        <Button color="gray" fullwidth on:click={() => handleCancel()}>取消</Button>
         {#if canDelete}
-          <Button color="red" fullwidth on:click={() => dispatch('delete')}>Delete</Button>
+          <Button color="red" fullwidth on:click={() => dispatch('delete')}>删除</Button>
         {/if}
 
         <Button type="submit" fullwidth>{submitText}</Button>

@@ -45,7 +45,7 @@
         dispatch('editSuccess');
       }
     } catch (error) {
-      handleError(error, 'Unable to update user');
+      handleError(error, '无法更新用户');
     }
   };
 
@@ -65,9 +65,9 @@
         dispatch('resetPasswordSuccess');
       }
     } catch (e) {
-      console.error('Error reseting user password', e);
+      console.error('重置用户密码时出错', e);
       notificationController.show({
-        message: 'Error reseting user password, check console for more details',
+        message: '重置用户密码时出错，请检查控制台以获取更多详细信息',
         type: NotificationType.Error,
       });
     } finally {
@@ -87,28 +87,28 @@
     class="flex flex-col place-content-center place-items-center gap-4 px-4 text-immich-primary dark:text-immich-dark-primary"
   >
     <Icon path={mdiAccountEditOutline} size="4em" />
-    <h1 class="text-2xl font-medium text-immich-primary dark:text-immich-dark-primary">Edit user</h1>
+    <h1 class="text-2xl font-medium text-immich-primary dark:text-immich-dark-primary">修改用户</h1>
   </div>
 
   <form on:submit|preventDefault={editUser} autocomplete="off">
     <div class="m-4 flex flex-col gap-2">
-      <label class="immich-form-label" for="email">Email</label>
+      <label class="immich-form-label" for="email">邮件</label>
       <input class="immich-form-input" id="email" name="email" type="email" bind:value={user.email} />
     </div>
 
     <div class="m-4 flex flex-col gap-2">
-      <label class="immich-form-label" for="name">Name</label>
+      <label class="immich-form-label" for="name">名称</label>
       <input class="immich-form-input" id="name" name="name" type="text" required bind:value={user.name} />
     </div>
 
     <div class="m-4 flex flex-col gap-2">
-      <label class="immich-form-label" for="quotaSize">Quota Size (GiB)</label>
+      <label class="immich-form-label" for="quotaSize">配额 (GiB)</label>
       <input class="immich-form-input" id="quotaSize" name="quotaSize" type="number" min="0" bind:value={quotaSize} />
       <p>Note: Enter 0 for unlimited quota</p>
     </div>
 
     <div class="m-4 flex flex-col gap-2">
-      <label class="immich-form-label" for="storage-label">Storage Label</label>
+      <label class="immich-form-label" for="storage-label">存储标签</label>
       <input
         class="immich-form-input"
         id="storage-label"
@@ -118,15 +118,15 @@
       />
 
       <p>
-        Note: To apply the Storage Label to previously uploaded assets, run the
+        注意：要将存储标签应用于之前上传的资源，请运行
         <a href={AppRoute.ADMIN_JOBS} class="text-immich-primary dark:text-immich-dark-primary">
-          Storage Migration Job</a
+          存储迁移任务</a
         >
       </p>
     </div>
 
     <div class="m-4 flex flex-col gap-2">
-      <label class="immich-form-label" for="external-path">External Path</label>
+      <label class="immich-form-label" for="external-path">外部路径</label>
       <input
         class="immich-form-input"
         id="external-path"
@@ -136,8 +136,8 @@
       />
 
       <p>
-        Note: Absolute path of parent import directory. A user can only import files if they exist at or under this
-        path.
+        注意：父导入目录的绝对路径。 用户只能导入位于此位置或下的
+        文件.
       </p>
     </div>
 
@@ -151,24 +151,24 @@
     <div class="mt-8 flex w-full gap-4 px-4">
       {#if canResetPassword}
         <Button color="light-red" fullwidth on:click={() => (isShowResetPasswordConfirmation = true)}
-          >Reset password</Button
+          >重置密码</Button
         >
       {/if}
-      <Button type="submit" fullwidth>Confirm</Button>
+      <Button type="submit" fullwidth>确认</Button>
     </div>
   </form>
 </div>
 
 {#if isShowResetPasswordConfirmation}
   <ConfirmDialogue
-    title="Reset Password"
-    confirmText="Reset"
+    title="重置密码"
+    confirmText="重置"
     on:confirm={resetPassword}
     on:cancel={() => (isShowResetPasswordConfirmation = false)}
   >
     <svelte:fragment slot="prompt">
       <p>
-        Are you sure you want to reset <b>{user.name}</b>'s password?
+        您确定要重置 <b>{user.name}</b>的密码吗?
       </p>
     </svelte:fragment>
   </ConfirmDialogue>

@@ -111,7 +111,7 @@
       {#if showItemCount}
         <p>
           {album.assetCount.toLocaleString($locale)}
-          {album.assetCount == 1 ? `item` : `items`}
+          {album.assetCount == 1 ? `条目` : `条目`}
         </p>
       {/if}
 

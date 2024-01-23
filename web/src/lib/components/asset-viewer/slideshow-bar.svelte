@@ -54,19 +54,19 @@
 </script>
 
 <div class="m-4 flex gap-2">
-  <CircleIconButton icon={mdiClose} on:click={() => dispatch('close')} title="Exit Slideshow" />
+  <CircleIconButton icon={mdiClose} on:click={() => dispatch('close')} title="退出幻灯片" />
   {#if $slideshowShuffle}
-    <CircleIconButton icon={mdiShuffle} on:click={() => ($slideshowShuffle = false)} title="Shuffle" />
+    <CircleIconButton icon={mdiShuffle} on:click={() => ($slideshowShuffle = false)} title="随机播放" />
   {:else}
-    <CircleIconButton icon={mdiShuffleDisabled} on:click={() => ($slideshowShuffle = true)} title="No shuffle" />
+    <CircleIconButton icon={mdiShuffleDisabled} on:click={() => ($slideshowShuffle = true)} title="关闭随机播放" />
   {/if}
   <CircleIconButton
     icon={progressBarStatus === ProgressBarStatus.Paused ? mdiPlay : mdiPause}
     on:click={() => (progressBarStatus === ProgressBarStatus.Paused ? progressBar.play() : progressBar.pause())}
-    title={progressBarStatus === ProgressBarStatus.Paused ? 'Play' : 'Pause'}
+    title={progressBarStatus === ProgressBarStatus.Paused ? '播放' : '暂停'}
   />
-  <CircleIconButton icon={mdiChevronLeft} on:click={() => dispatch('prev')} title="Previous" />
-  <CircleIconButton icon={mdiChevronRight} on:click={() => dispatch('next')} title="Next" />
+  <CircleIconButton icon={mdiChevronLeft} on:click={() => dispatch('prev')} title="上一个" />
+  <CircleIconButton icon={mdiChevronRight} on:click={() => dispatch('next')} title="下一个" />
 </div>
 
 <ProgressBar
