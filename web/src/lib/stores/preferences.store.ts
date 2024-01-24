@@ -87,14 +87,14 @@ export const sidebarSettings = persisted<SidebarSettings>('sidebar-settings-1', 
 });
 
 export enum AlbumViewMode {
-  封面 = '封面',
-  列表 = '列表',
+  Cover = '封面',
+  List = '列表',
 }
 
 export const albumViewSettings = persisted<AlbumViewSettings>('album-view-settings', {
   sortBy: '最新的照片',
   sortDesc: true,
-  view: AlbumViewMode.封面,
+  view: AlbumViewMode.Cover,
 });
 
 export const showDeleteModal = persisted<boolean>('delete-confirm-dialog', true, {});

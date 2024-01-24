@@ -227,10 +227,10 @@
   };
 
   const handleChangeListMode = () => {
-    if ($albumViewSettings.view === AlbumViewMode.封面) {
-      $albumViewSettings.view = AlbumViewMode.列表;
+    if ($albumViewSettings.view === AlbumViewMode.Cover) {
+      $albumViewSettings.view = AlbumViewMode.List;
     } else {
-      $albumViewSettings.view = AlbumViewMode.封面;
+      $albumViewSettings.view = AlbumViewMode.Cover;
     }
   };
 </script>
@@ -275,7 +275,7 @@
 
     <LinkButton on:click={() => handleChangeListMode()}>
       <div class="flex place-items-center gap-2 text-sm">
-        {#if $albumViewSettings.view === AlbumViewMode.列表}
+        {#if $albumViewSettings.view === AlbumViewMode.List}
           <Icon path={mdiViewGridOutline} size="18" />
           <p class="hidden sm:block">封面</p>
         {:else}
@@ -287,7 +287,7 @@
   </div>
   {#if $albums.length !== 0}
     <!-- Album Card -->
-    {#if $albumViewSettings.view === AlbumViewMode.封面}
+    {#if $albumViewSettings.view === AlbumViewMode.Cover}
       <div class="grid grid-cols-[repeat(auto-fill,minmax(14rem,1fr))]">
         {#each $albums as album, idx (album.id)}
           <a data-sveltekit-preload-data="hover" href="{AppRoute.ALBUMS}/{album.id}" animate:flip={{ duration: 200 }}>
@@ -299,7 +299,7 @@
           </a>
         {/each}
       </div>
-    {:else if $albumViewSettings.view === AlbumViewMode.列表}
+    {:else if $albumViewSettings.view === AlbumViewMode.List}
       <table class="mt-5 w-full text-left">
         <thead
           class="mb-4 flex h-12 w-full rounded-md border bg-gray-50 text-immich-primary dark:border-immich-dark-gray dark:bg-immich-dark-gray dark:text-immich-dark-primary"
@@ -327,7 +327,7 @@
                 >
                 <td class="text-md text-ellipsis text-center sm:w-2/12 md:w-2/12 xl:w-[15%] 2xl:w-[12%]">
                   {album.assetCount}
-                  {album.assetCount > 1 ? `条` : `条`}
+                  {album.assetCount > 1 ? `items` : `item`}
                 </td>
                 <td class="text-md hidden text-ellipsis text-center sm:block w-3/12 xl:w-[15%] 2xl:w-[12%]"
                   >{dateLocaleString(album.updatedAt)}
