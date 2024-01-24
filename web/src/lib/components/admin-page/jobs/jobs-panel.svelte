@@ -160,8 +160,8 @@
       {title}
       {disabled}
       {subtitle}
-      allText={allText || 'ALL'}
-      missingText={missingText || 'MISSING'}
+      allText={allText || '全部'}
+      missingText={missingText || '丢失'}
       {allowForceCommand}
       {jobCounts}
       {queueStatus}
