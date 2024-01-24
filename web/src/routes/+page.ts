@@ -10,13 +10,13 @@ export const csr = true;
 export const load = (async () => {
   const authenticated = await isLoggedIn();
   if (authenticated) {
-    redirect(302, AppRoute.PHOTOS);
+    throw redirect(302, AppRoute.PHOTOS);
   }
 
   const { data } = await api.serverInfoApi.getServerConfig();
   if (data.isInitialized) {
     // Redirect to login page if there exists an admin account (i.e. server is initialized)
-    redirect(302, AppRoute.AUTH_LOGIN);
+    throw redirect(302, AppRoute.AUTH_LOGIN);
   }
 
   return {

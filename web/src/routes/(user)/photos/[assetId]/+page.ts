@@ -3,5 +3,5 @@ import { redirect } from '@sveltejs/kit';
 import type { PageLoad } from './$types';
 
 export const load = (async () => {
-  redirect(302, AppRoute.PHOTOS);
+  throw redirect(302, AppRoute.PHOTOS);
 }) satisfies PageLoad;

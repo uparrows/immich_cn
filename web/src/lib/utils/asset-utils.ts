@@ -2,12 +2,12 @@ import { notificationController, NotificationType } from '$lib/components/shared
 import { downloadManager } from '$lib/stores/download';
 import {
   api,
-  type BulkIdResponseDto,
-  type AssetResponseDto,
-  type DownloadResponseDto,
-  type DownloadInfoDto,
+  BulkIdResponseDto,
+  AssetResponseDto,
+  DownloadResponseDto,
+  DownloadInfoDto,
   AssetTypeEnum,
-  type UserResponseDto,
+  UserResponseDto,
 } from '@api';
 import { handleError } from './handle-error';
 

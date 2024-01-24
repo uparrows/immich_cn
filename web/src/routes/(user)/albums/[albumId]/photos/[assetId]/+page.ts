@@ -6,8 +6,8 @@ export const load: PageLoad = async ({ params }) => {
   const albumId = params.albumId;
 
   if (albumId) {
-    redirect(302, `${AppRoute.ALBUMS}/${albumId}`);
+    throw redirect(302, `${AppRoute.ALBUMS}/${albumId}`);
   } else {
-    redirect(302, AppRoute.PHOTOS);
+    throw redirect(302, AppRoute.PHOTOS);
   }
 };

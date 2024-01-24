@@ -37,8 +37,8 @@ export const load = (async ({ params }) => {
       };
     }
 
-    error(404, {
-      message: '共享链接无效',
+    throw error(404, {
+      message: 'Invalid shared link',
     });
   }
 }) satisfies PageLoad;

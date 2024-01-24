@@ -7,6 +7,7 @@ import {
   AssetJobName,
   AuditApi,
   AuthenticationApi,
+  ConfigurationParameters,
   FaceApi,
   JobApi,
   JobName,

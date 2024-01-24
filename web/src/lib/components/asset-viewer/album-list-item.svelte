@@ -1,5 +1,5 @@
 <script lang="ts">
-  import { type AlbumResponseDto, ThumbnailFormat, api } from '@api';
+  import { AlbumResponseDto, ThumbnailFormat, api } from '@api';
   import { createEventDispatcher } from 'svelte';
 
   const dispatch = createEventDispatcher<{

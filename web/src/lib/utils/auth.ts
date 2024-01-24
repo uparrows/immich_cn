@@ -24,11 +24,11 @@ export const authenticate = async (options?: AuthOptions) => {
   const user = savedUser || (await getAuthUser());
 
   if (!user) {
-    redirect(302, AppRoute.AUTH_LOGIN);
+    throw redirect(302, AppRoute.AUTH_LOGIN);
   }
 
   if (options.admin && !user.isAdmin) {
-    redirect(302, AppRoute.PHOTOS);
+    throw redirect(302, AppRoute.PHOTOS);
   }
 
   if (!savedUser) {
