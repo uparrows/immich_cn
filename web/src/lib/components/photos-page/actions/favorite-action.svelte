@@ -43,13 +43,13 @@
       onFavorite?.(ids, isFavorite);
 
       notificationController.show({
-        message: isFavorite ? `Added ${ids.length} to favorites` : `Removed ${ids.length} from favorites`,
+        message: isFavorite ? `添加 ${ids.length} 到收藏` : `移除 ${ids.length} 收藏`,
         type: NotificationType.Info,
       });
 
       clearSelect();
     } catch (error) {
-      handleError(error, `Unable to ${isFavorite ? 'add to' : 'remove from'} favorites`);
+      handleError(error, `无法将 ${isFavorite ? '添加到' : '移除'} 收藏`);
     } finally {
       loading = false;
     }
@@ -62,7 +62,7 @@
 
 {#if !menuItem}
   {#if loading}
-    <CircleIconButton title="Loading" icon={mdiTimerSand} />
+    <CircleIconButton title="加载中" icon={mdiTimerSand} />
   {:else}
     <CircleIconButton title={text} {icon} on:click={handleFavorite} />
   {/if}

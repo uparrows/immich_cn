@@ -31,7 +31,7 @@
       const { id, albumName } = response.data;
 
       notificationController.show({
-        message: `Added ${assetIds.length} to ${albumName}`,
+        message: `添加 ${assetIds.length} 到 ${albumName}`,
         type: NotificationType.Info,
       });
 

@@ -419,10 +419,10 @@
 
       notificationController.show({
         type: NotificationType.Info,
-        message: asset.isFavorite ? `Added to favorites` : `Removed from favorites`,
+        message: asset.isFavorite ? `添加到收藏` : `从收藏中移除`,
       });
     } catch (error) {
-      await handleError(error, `Unable to ${asset.isFavorite ? `add asset to` : `remove asset from`} favorites`);
+      await handleError(error, `无法 ${asset.isFavorite ? `添加资源到` : `移除资源`} 收藏`);
     }
   };
 
@@ -473,10 +473,10 @@
 
       notificationController.show({
         type: NotificationType.Info,
-        message: asset.isArchived ? `Added to archive` : `Removed from archive`,
+        message: asset.isArchived ? `添加到归档` : `从归档中移除`,
       });
     } catch (error) {
-      await handleError(error, `Unable to ${asset.isArchived ? `add asset to` : `remove asset from`} archive`);
+      await handleError(error, `无法 ${asset.isArchived ? `添加资源到` : `移除资源`} 归档`);
     }
   };
 
@@ -485,7 +485,7 @@
       await api.assetApi.runAssetJobs({ assetJobsDto: { assetIds: [asset.id], name } });
       notificationController.show({ type: NotificationType.Info, message: api.getAssetJobMessage(name) });
     } catch (error) {
-      await handleError(error, `Unable to submit job`);
+      await handleError(error, `无法提交任务`);
     }
   };
 
@@ -516,7 +516,7 @@
     try {
       await assetViewerHtmlElement.requestFullscreen();
     } catch (error) {
-      console.error('Error entering fullscreen', error);
+      console.error('无法进入全屏', error);
       $slideshowState = SlideshowState.StopSlideshow;
     }
   };
@@ -527,7 +527,7 @@
         await document.exitFullscreen();
       }
     } catch (error) {
-      console.error('Error exiting fullscreen', error);
+      console.error('无法退出全屏', error);
     } finally {
       $stopSlideshowProgress = true;
       $slideshowState = SlideshowState.None;

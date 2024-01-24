@@ -305,7 +305,7 @@
       const count = results.filter(({ success }) => success).length;
       notificationController.show({
         type: NotificationType.Info,
-        message: `Added ${count} asset${count === 1 ? '' : 's'}`,
+        message: `已添加 ${count} 资源${count === 1 ? '' : '.'}`,
       });
 
       await refreshAlbum();

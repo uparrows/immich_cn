@@ -35,11 +35,11 @@
       });
 
       savedConfig = { ...result.data };
-      notificationController.show({ message: 'Settings saved', type: NotificationType.Info });
+      notificationController.show({ message: '设置已保存', type: NotificationType.Info });
 
       dispatch('save');
     } catch (error) {
-      handleError(error, 'Unable to save settings');
+      handleError(error, '无法保存设置');
     }
   };
 
@@ -48,7 +48,7 @@
     config = configKeys.reduce((acc, key) => ({ ...acc, [key]: resetConfig[key] }), config);
 
     notificationController.show({
-      message: 'Reset settings to the recent saved settings',
+      message: '将设置重置为最近保存的值',
       type: NotificationType.Info,
     });
   };
@@ -57,7 +57,7 @@
     config = configKeys.reduce((acc, key) => ({ ...acc, [key]: defaultConfig[key] }), config);
 
     notificationController.show({
-      message: 'Reset settings to default',
+      message: '将设置重置为默认值',
       type: NotificationType.Info,
     });
   };

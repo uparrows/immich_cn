@@ -98,9 +98,9 @@ async function fileUploader(asset: File, albumId: string | undefined = undefined
         }
 
         if (albumId && res.id) {
-          uploadAssetsStore.updateAsset(deviceAssetId, { message: 'Adding to album...' });
+          uploadAssetsStore.updateAsset(deviceAssetId, { message: '添加到相册...' });
           await addAssetsToAlbum(albumId, [res.id]);
-          uploadAssetsStore.updateAsset(deviceAssetId, { message: 'Added to album' });
+          uploadAssetsStore.updateAsset(deviceAssetId, { message: '已添加到相册' });
         }
 
         uploadAssetsStore.updateAsset(deviceAssetId, {

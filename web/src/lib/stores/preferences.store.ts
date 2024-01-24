@@ -87,8 +87,8 @@ export const sidebarSettings = persisted<SidebarSettings>('sidebar-settings-1', 
 });
 
 export enum AlbumViewMode {
-  Cover = '封面',
-  List = '列表',
+  Cover = 'Cover',
+  List = 'List',
 }
 
 export const albumViewSettings = persisted<AlbumViewSettings>('album-view-settings', {

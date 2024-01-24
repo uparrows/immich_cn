@@ -22,7 +22,7 @@ export const addAssetsToAlbum = async (albumId: string, assetIds: Array<string>)
       const count = results.filter(({ success }) => success).length;
       notificationController.show({
         type: NotificationType.Info,
-        message: `Added ${count} asset${count === 1 ? '' : 's'}`,
+        message: `添加 ${count} 资源${count === 1 ? '' : '.'}`,
       });
 
       return results;
@@ -49,7 +49,7 @@ export const downloadArchive = async (fileName: string, options: DownloadInfoDto
     const { data } = await api.assetApi.getDownloadInfo({ downloadInfoDto: options, key: api.getKey() });
     downloadInfo = data;
   } catch (error) {
-    handleError(error, 'Unable to download files');
+    handleError(error, '无法下载文件');
     return;
   }
 
@@ -81,7 +81,7 @@ export const downloadArchive = async (fileName: string, options: DownloadInfoDto
 
       downloadBlob(data, archiveName);
     } catch (e) {
-      handleError(e, 'Unable to download files');
+      handleError(e, '无法下载文件');
       downloadManager.clear(downloadKey);
       return;
     } finally {
@@ -135,12 +135,12 @@ export const downloadFile = async (asset: AssetResponseDto) => {
 
       notificationController.show({
         type: NotificationType.Info,
-        message: `Downloading asset ${asset.originalFileName}`,
+        message: `正在下载资源 ${asset.originalFileName}`,
       });
 
       downloadBlob(data, filename);
     } catch (e) {
-      handleError(e, `Error downloading ${filename}`);
+      handleError(e, `下载 ${filename} 失败`);
       downloadManager.clear(downloadKey);
     } finally {
       setTimeout(() => downloadManager.clear(downloadKey), 5_000);

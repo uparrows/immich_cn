@@ -35,7 +35,7 @@
         return;
       } catch (e) {
         console.error('Error [login-form] [oauth.callback]', e);
-        oauthError = (await getServerErrorMessage(e)) || 'Unable to complete OAuth login';
+        oauthError = (await getServerErrorMessage(e)) || '无法完成OAuth登录';
         oauthLoading = false;
       }
     }
@@ -47,7 +47,7 @@
         return;
       }
     } catch (error) {
-      await handleError(error, 'Unable to connect!');
+      await handleError(error, '无法建立连接!');
     }
 
     oauthLoading = false;
@@ -102,7 +102,7 @@
     {/if}
 
     <div class="flex flex-col gap-2">
-      <label class="immich-form-label" for="email">Email</label>
+      <label class="immich-form-label" for="email">邮件</label>
       <input
         class="immich-form-input"
         id="email"
@@ -115,7 +115,7 @@
     </div>
 
     <div class="flex flex-col gap-2">
-      <label class="immich-form-label" for="password">Password</label>
+      <label class="immich-form-label" for="password">密码</label>
       <input
         class="immich-form-input"
         id="password"
@@ -134,7 +134,7 @@
             <LoadingSpinner />
           </span>
         {:else}
-          Login
+          登录
         {/if}
       </Button>
     </div>

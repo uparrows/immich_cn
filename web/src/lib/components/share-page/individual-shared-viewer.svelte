@@ -54,11 +54,11 @@
       const added = data.filter((item) => item.success).length;
 
       notificationController.show({
-        message: `Added ${added} assets`,
+        message: `添加 ${added} 资源`,
         type: NotificationType.Info,
       });
     } catch (e) {
-      await handleError(e, 'Unable to add assets to shared link');
+      await handleError(e, '无法将资源添加到共享链接');
     }
   };
 
