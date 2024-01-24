@@ -227,10 +227,10 @@
   };
 
   const handleChangeListMode = () => {
-    if ($albumViewSettings.view === AlbumViewMode.Cover) {
-      $albumViewSettings.view = AlbumViewMode.List;
+    if ($albumViewSettings.view === AlbumViewMode.封面) {
+      $albumViewSettings.view = AlbumViewMode.列表;
     } else {
-      $albumViewSettings.view = AlbumViewMode.Cover;
+      $albumViewSettings.view = AlbumViewMode.封面;
     }
   };
 </script>
@@ -275,19 +275,19 @@
 
     <LinkButton on:click={() => handleChangeListMode()}>
       <div class="flex place-items-center gap-2 text-sm">
-        {#if $albumViewSettings.view === AlbumViewMode.List}
+        {#if $albumViewSettings.view === AlbumViewMode.列表}
           <Icon path={mdiViewGridOutline} size="18" />
-          <p class="hidden sm:block">Cover</p>
+          <p class="hidden sm:block">封面</p>
         {:else}
           <Icon path={mdiFormatListBulletedSquare} size="18" />
-          <p class="hidden sm:block">List</p>
+          <p class="hidden sm:block">列表</p>
         {/if}
       </div>
     </LinkButton>
   </div>
   {#if $albums.length !== 0}
     <!-- Album Card -->
-    {#if $albumViewSettings.view === AlbumViewMode.Cover}
+    {#if $albumViewSettings.view === AlbumViewMode.封面}
       <div class="grid grid-cols-[repeat(auto-fill,minmax(14rem,1fr))]">
         {#each $albums as album, idx (album.id)}
           <a data-sveltekit-preload-data="hover" href="{AppRoute.ALBUMS}/{album.id}" animate:flip={{ duration: 200 }}>
@@ -299,7 +299,7 @@
           </a>
         {/each}
       </div>
-    {:else if $albumViewSettings.view === AlbumViewMode.List}
+    {:else if $albumViewSettings.view === AlbumViewMode.列表}
       <table class="mt-5 w-full text-left">
         <thead
           class="mb-4 flex h-12 w-full rounded-md border bg-gray-50 text-immich-primary dark:border-immich-dark-gray dark:bg-immich-dark-gray dark:text-immich-dark-primary"
@@ -308,7 +308,7 @@
             {#each Object.keys(sortByOptions) as key (key)}
               <TableHeader bind:albumViewSettings={$albumViewSettings.sortBy} bind:option={sortByOptions[key]} />
             {/each}
-            <th class="hidden text-center text-sm font-medium 2xl:block 2xl:w-[12%]">Action</th>
+            <th class="hidden text-center text-sm font-medium 2xl:block 2xl:w-[12%]">操作</th>
           </tr>
         </thead>
         <tbody
